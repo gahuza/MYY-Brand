@@ -1,0 +1,2360 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width =device-width, initial-scale=1.0">
+        <title>My Portfolio</title>
+        <link rel="stylesheet" href="/assets/styles/index.css">
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=La Belle Aurore' rel='stylesheet'>
+        <link href="/assets/styles/swiper-bundle.min.css" rel="stylesheet">
+        <style>
+
+
+
+
+
+
+
+
+
+
+
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+body{
+    background-color: #1D1D1D;
+    color: #FFFFFF;  
+    font-family: 'Roboto'; 
+    overflow-x: hidden;
+}
+
+@media only screen and (max-width: 425px){
+    body{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .logo{
+        width:200px;
+        position: relative;
+        left: 210px;
+        display: flex;
+        justify-content: center;
+    }
+    #navbar p{
+        font-size: 40px;
+        padding: 10px 0px 20px 0px;
+        position: relative;
+        left: 170px;
+    }
+    #navbar{
+        display: flex;
+        flex-direction: column;
+        width:236%;
+        background-color: #181818;
+        color: #999696;
+        display: none;
+        position: fixed;
+        z-index: 10;
+    }
+    .dropdown{
+        display: none;
+    }
+    .dropdown:checked ~ #navbar{
+        display: block;
+    }
+    a{
+        text-decoration: none;
+        color: #999696;
+        padding-left: 20px;
+    }
+    a.work,
+    a.blogs,
+    a.contacts,
+    a.login{
+        padding: 20px 0px 20px 0px;   
+    }
+    a.about-me{
+        padding: 60px 0px 20px 0px;  
+    }
+    a.work,
+    a.blogs,
+    a.contacts,
+    a.login,
+    a.about-me{
+        display: flex;
+        justify-content: center;
+        position: relative;
+        right: 430px;
+        font-size: 40px;
+    }
+    a:hover{
+        color: #21EFEF;
+    }
+    #home{
+        background-color: black;        
+    }
+    .dropdown-nav{
+        width: 50px;
+        position: fixed;
+        left: 550px;
+        top: 10px;
+        color: #21EFEF;
+        background-color: #21EFEF;
+        z-index: 10;
+    }
+    .inner-logo{
+        width: 15%;
+        position: relative;
+        top: 20px;
+    }
+    .tag1lp,
+    .tag2lp,
+    .tag3lp,
+    .tag4lp,
+    .tag5lp,
+    .tag6lp{
+        font-size: 25px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+    #p{
+        font-size: 19px;
+        position: relative;
+        left: 30px;
+        color: #999696;
+    }
+    .tag1lp{
+        position: relative;
+        left: 10px;
+    }
+    .tag2lp{
+        position: relative;
+        left: 20px;
+    }
+    .tag3lp{
+        position: relative;
+        left: 25px;
+    }
+    .tag5lp{
+        position: relative;
+        left: 25px;
+    }
+    .tag6lp{
+        position: relative;
+        left: 25px;
+    }
+    .welcome,
+    #h1{
+        font-size: 58px;
+        font-weight: bolder;
+        position: relative;
+        left: 20px;
+    }
+    .welcome{
+        padding-top: 10px;
+    }
+    #h1{
+        position: relative;
+        top: 30px;
+    }
+    #about-me{
+        position: relative;
+        left: 25px;
+    }
+    .tag1ap,
+    .tag2ap,
+    .tag3ap,
+    .tag4ap{
+        font-size: 25px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+    .description{
+        font-size: 35px;
+        display: flex;
+        justify-content: center;
+    }
+    #skills{
+        font-size: 25px;
+        display: flex;
+        justify-content: space-around;
+    }
+    .picture{
+        width: 80%;
+        position: relative;
+        left: 40px;
+    }
+    #skills p{
+        padding: 5px;
+    }
+    #about-me h2{
+        color: #21EFEF;
+        font-size: 60px;
+    }
+    #work{
+        position: relative;
+        left: 25px;
+    }
+    #work h2{
+        font-size: 60px;
+        color: #21EFEF;
+    }
+    .work-description{
+        font-size: 35px;
+        position: relative;
+        left: 30px;
+    }
+    .work-description br{
+        display: none;
+    }
+    .projects{
+        display: flex;
+        color: #1D1D1D;
+        position: relative;
+        left: 70px;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .project1,
+    .project2,
+    .project3,
+    .project4{
+        background-color: #FFFFFF;
+        margin: 10px;
+        position: relative;
+        border-radius: 10px;
+        position: relative;
+        left: 25px;
+        box-shadow: 10px 10px 5px black;
+    }
+    .project-img{
+        height: 400px;
+        margin-bottom: 5px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        border-radius: 10px 10px 0px 0px ;
+    }
+    .p1-img,
+    .p2-img,
+    .p3-img,
+    .p4-img{
+        background-image: url("/assets/images/project-image.png");
+    }
+    .projects h3{
+        display: block;
+        text-align: center;
+        color: black;
+        font-size: 30px;
+    }
+    .project-link{
+        font-size: 20px;
+        display: block;
+        text-align: center;
+        position: relative;
+        background-color: #21EFEF;
+        border-radius: 0px 0px 10px 10px ;
+        color: #21EFEF;
+    }
+    .project1:hover,
+    .project2:hover,
+    .project3:hover,
+    .project4:hover{
+        transform: scale(1.05);
+    }   
+    .project1:hover > a,
+    .project2:hover > a,
+    .project3:hover > a,
+    .project4:hover > a{
+        color: black;
+    }
+    .tag1w,
+    .tag2w,
+    .tag3w,
+    .tag4w,
+    .tag5w,
+    .tag6w{
+        font-size: 25px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+    .tag5w{
+        position: relative;
+        padding-bottom: 10px;
+    }
+    .tag6w{
+        position: relative;
+        padding-top: 10px;
+    }
+    #blogs{
+        position: relative;
+        left: 25px;
+    }
+    .b-title{
+        font-size: 60px;
+        color: #21EFEF; 
+    }
+    .blog-container{
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        left: 100px;
+    }
+    #no-blog-list{
+        display: block;
+        text-align: center;
+        font-size: 50px;
+        padding: 5px;
+        width: fit-content;
+        position: relative;
+        left: 150px;
+    }
+    .blog h1,
+    .blog h2{
+        color: black;
+        font-size: 25px;
+        padding: 5px 20px 0px 20px;
+        display: block;
+        text-align: center;
+    }
+    .blog p,
+    .blog h3{
+        color: black;
+        font-size: 20px;
+        padding: 10px 20px 0px 20px;
+    }
+    .blog{
+        background-color: #999696;
+        border-radius: 10px;
+        box-shadow: 10px 10px 5px black;
+        margin: 20px;
+        width: fit-content;
+        
+    }
+    .blog-view{
+        color: #D9D9D9;
+        font-size: 30px;
+        display: block;
+    }
+    .blog{
+        background-color: #999696;
+        box-shadow: 15px 15px 10px black;
+        border-radius: 15px;
+    }
+    .tag1bp,
+    .tag2bp,
+    .tag3bp,
+    .tag4bp{
+        font-size: 35px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+    .tag1bp,
+    .tag2bp,
+    .tag3bp,
+    .tag4bp{
+        font-size: 25px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+   
+    #contacts{
+       position: relative;
+       left: 25px;
+    }
+    #sendbtn{
+        background-color: #1D1D1D;
+        color: #21EFEF;
+        width: 50%;
+        height: 50px;
+        font-size: 25px;   
+        position: relative;
+        left: 260px;
+        border: 1px solid #21EFEF;
+    }
+    #message{
+        width: 100%;
+        border: 0;
+        background-color: #2b2b2b;
+        font-size: 30px;
+        color: #8d8d8d;
+        margin: 5px 0px 5px 0px;
+        height: 300px;
+        padding: 20px;
+    }
+    #other-contacts{
+        font-size: 50px;
+        position: relative;
+        left: 50px;
+    }
+    #name,
+    #email{
+        width: 100%;
+        border-bottom: 2px solid #1D1D1D;
+        color: #8d8d8d;
+        padding: 20px;
+        background-color: #2b2b2b;
+        font-size: 30px;
+    }
+    .ig-logo,
+    .in-logo,
+    .gt-logo,
+    .email-logo{
+        width: 50px;
+        height: 50px;
+    }
+    .email{
+        display: flex;
+    }
+    .email p{
+        margin: 0 0 0 10px;
+        font-size: 40px;
+        color: #8d8d8d;
+    }
+    #sendbtn:hover{
+        background-color: #21EFEF;
+        color: black;
+    }
+    #short-message{
+        position: relative;
+        left: 50px;
+        font-size: 35px;
+    }
+    #short-message br{
+        display: none;
+    }
+    #contact-form{
+        position: relative;
+        left: 30px;
+    }
+    #ig-profile,
+    #in-profile,
+    #gt-profile{
+        font-size: 40px;
+        position: relative;
+        right: 25px;
+        bottom: 15px;
+    }
+    #contacts h2{
+        font-size: 60px;
+        color:#21EFEF;
+    }
+    .tag1cp,
+    .tag2cp,
+    .tag3cp,
+    .tag4cp,
+    .tag5cp,
+    .tag6cp{
+        font-size: 25px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+    .tag5cp,
+    .tag6cp{
+        position: relative;
+        right: 30px;
+    }
+    .tag3cp,
+    .tag4cp{
+        position: relative;
+        right: 40px;
+    }
+    #login{
+       position: relative;
+       left: 25px;
+    }
+    #login h2{
+        font-size: 60px;
+        color: #21EFEF; 
+    }
+    .tag1logp,
+    .tag2logp,
+    .tag3logp,
+    .tag4logp,
+    .tag5logp,
+    .tag6logp{
+        font-size: 25px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+    .tag4logp,
+    .tag3logp{
+        position: relative;
+        left: 30px;
+    }
+    
+    .tag5logp{
+        position: relative;
+        left: 15px;
+    }
+    .login-container{
+        background-color: #2B2B2B;
+        width: 120%;
+        height: 400px;
+        position: relative;
+        left: 70px;
+        border-radius: 15px;    
+    }
+    #login-email,
+    #login-password{
+        font-size: 30px;
+        height: 50px;
+        width: 90%;
+        padding: 25px;
+        border-bottom: 2px solid black;
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+        background-color: #2B2B2B;
+        position: relative;
+        left: 25px;
+    }
+    #loginbtn{
+        background-color: #2B2B2B;
+        color: #21EFEF;
+        width: 60%;
+        height: 50px;
+        font-size: 30px;   
+        position: relative;
+        top: 20px;
+        left: 80px;
+        padding: 5px;
+        border: 1px solid #21EFEF;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+    }
+    #login-form{
+        position: relative;
+       
+    }
+    .login-container h3{
+        position: relative;
+        padding: 30px 0px 30px 0px;
+        font-size: 35px;
+        display: flex;
+        justify-content: center;
+    }
+    .loginmsg{
+        font-size: 30px;
+        position: relative;
+        top: 50px;
+        display: flex;
+        justify-content: center;
+    }
+    #loginbtn:hover{
+        background-color: #21EFEF;
+        color: black; 
+    }
+    .invalid input{
+        border: 1px solid red !important;
+    }
+    #error-msg{
+        font-size: 30px;
+        color: red;
+        display: block;
+        text-align: center;
+
+    }
+    .success input{
+        border: 1px solid greenyellow !important;
+    }
+    #error-msg1,
+    #error-msg2,
+    #error-msg3{
+        font-size: 15px;
+        color: red;
+    }
+    .invalid-contacts {
+        border: 1px solid red !important;
+    }
+}
+@media only screen and (min-width: 426px) and (max-width: 540px){
+    body{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .logo{
+        width:200px;
+        position: relative;
+        left: 340px;
+        display: flex;
+        justify-content: center;
+    }
+    #navbar p{
+        font-size: 40px;
+        padding: 10px 0px 20px 0px;
+        position: relative;
+        left: 300px;
+        display: flex;
+    }
+    #navbar{
+        display: flex;
+        flex-direction: column;
+        width: 332%;
+        background-color: #181818;
+        color: #999696;
+        display: none;
+        position: fixed;
+        z-index: 10;
+    }
+    .dropdown{
+        display: none;
+    }
+    .dropdown:checked ~ #navbar{
+        display: block;
+    }
+    a{
+        text-decoration: none;
+        color: #999696;
+        padding-left: 20px;
+        font-size: 30px;
+    }
+    a.work,
+    a.blogs,
+    a.contacts,
+    a.login{
+        padding: 20px 0px 20px 0px;
+        display: flex;
+    }
+    a.about-me{
+        padding: 60px 0px 20px 0px;
+        display: flex;
+    }
+    a.work,
+    a.blogs,
+    a.contacts,
+    a.login,
+    a.about-me{
+        display: flex;
+        justify-content: center;
+        position: relative;
+        right: 1030px;
+        font-size: 40px;
+    }
+    a:hover{
+        color: #21EFEF;
+    }
+    #home{
+        background-color: black;        
+    }
+    .dropdown-nav{
+        width: 50px;
+        position: fixed;
+        left: 780px;
+        top: 10px;
+        color: #21EFEF;
+        background-color: #21EFEF;
+        z-index: 10;
+    }
+    .inner-logo{
+        width: 70px;
+        position: relative;
+        top: 28px;
+    }
+    #h1{
+        position: relative;
+        top: 35px;
+    }
+    .welcome{
+        padding-bottom: 20px;
+    }
+    .tag1lp,
+    .tag2lp,
+    .tag3lp,
+    .tag4lp,
+    .tag5lp,
+    .tag6lp{
+        font-size: 35px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+    #p{
+        font-size: 25px;
+        position: relative;
+        left: 40px;
+        color: #999696;
+    }
+    
+    .tag2lp{
+        position: relative;
+        left: 15px;
+    }
+    .tag3lp{
+        position: relative;
+        left: 30px;
+    }
+    .tag4lp{
+        position: relative;
+        left: 30px;
+    }
+    .tag5lp{
+        position: relative;
+        left: 25px;
+    }
+    .tag6lp{
+        position: relative;
+        left: 25px;
+    }
+    .welcome,
+    #h1{
+        font-size: 77px;
+        font-weight: bolder;
+    }
+    #landing-page{
+        padding-left: 25px;
+    }
+    #about-me{
+        padding-left: 25px;
+    }
+    #about-me h2{
+        color:#21EFEF;
+        font-size: 100px;
+    }
+    .tag1ap,
+    .tag2ap,
+    .tag3ap,
+    .tag4ap{
+        font-size: 35px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+    .description{
+        font-size: 40px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
+    #skills{
+        font-size: 35px;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        padding: 20px;
+    }
+    #skills p{
+        padding: 5px;
+    }
+    .picture{
+        width: 90%;
+        position: relative;
+        left: 20px;
+        display: flex;
+        justify-content: center;
+    }
+    #work{
+        padding-left: 25px;
+        position: relative;
+    }
+    #work h2{
+        color: #21EFEF;
+        font-size: 100px;
+    }
+    .work-description{
+        font-size: 40px;
+        position: relative;
+        left: 80px;
+    }
+    .projects{
+        display: flex;
+        color: #1D1D1D;
+        position: relative;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .project1,
+    .project2,
+    .project3,
+    .project4{
+        background-color: #FFFFFF;
+        margin: 20px;
+        position: relative;
+        border-radius: 10px;
+        left: 150px;
+        box-shadow: 10px 10px 5px black;
+    }
+    .project-img{
+        height: 400px;
+        margin-bottom: 5px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-radius: 10px 10px 0px 0px ;
+    }
+    .p1-img,
+    .p2-img,
+    .p3-img,
+    .p4-img{
+        background-image: url("/assets/images/project-image.png");
+    }
+    .projects h3{
+        display: block;
+        text-align: center;
+        color: black;
+        font-size: 40px;
+    }
+    .project-link{
+        font-size: 35px;
+        display: block;
+        text-align: center;
+        position: relative;
+        background-color: #21EFEF;
+        border-radius: 0px 0px 10px 10px ;
+        color: #21EFEF;
+    }
+    .project1:hover,
+    .project2:hover,
+    .project3:hover,
+    .project4:hover{
+        transform: scale(1.05);
+    }   
+    .project1:hover > a,
+    .project2:hover > a,
+    .project3:hover > a,
+    .project4:hover > a{
+        color: black;
+    }
+    .tag1w,
+    .tag2w,
+    .tag3w,
+    .tag4w,
+    .tag5w,
+    .tag6w{
+        font-size: 35px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+    .tag3w,
+    .tag4w{
+        position: relative;
+        left: 15px;
+    }
+    #blogs{
+        padding-left: 25px;
+    }
+    .b-title{
+        color: #21EFEF;
+        font-size: 100px;
+    }
+    .blog-container{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    #no-blog-list{
+        display: block;
+        text-align: center;
+        font-size: 50px;
+        padding: 5px;
+        width: fit-content;
+        position: relative;
+        left: 200px;
+    }
+    .blog h1,
+    .blog h2{
+        color: black;
+        font-size: 25px;
+        padding: 5px 20px 0px 20px;
+        display: block;
+        text-align: center;
+    }
+    .blog p,
+    .blog h3{
+        color: black;
+        font-size: 20px;
+        padding: 10px 20px 0px 20px;
+    }
+    .blog{
+        background-color: #999696;
+        border-radius: 10px;
+        box-shadow: 10px 10px 5px black;
+        margin: 20px;
+        width: fit-content;
+        
+    }
+    .blog-view{
+        color: #D9D9D9;
+        font-size: 30px;
+        display: block;
+    }
+    .blog{
+        background-color: #999696;
+        box-shadow: 15px 15px 10px black;
+        border-radius: 15px;
+    }
+    .tag1bp,
+    .tag2bp,
+    .tag3bp,
+    .tag4bp{
+        font-size: 35px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+    #contacts{
+        padding-left: 25px;
+        position: relative;
+    }
+    #contacts h2{
+        color: #21EFEF;
+        font-size: 100px;
+    }
+    #sendbtn{
+        background-color: #1D1D1D;
+        color: #21EFEF;
+        width: 50%;
+        height: 50px;
+        font-size: 25px;   
+        position: relative;
+        left: 270px;
+        border: 1px solid #21EFEF;
+    }
+    #message{
+        width: 100%;
+        border: 0;
+        background-color: #2b2b2b;
+        font-size: 20px;
+        color: #8d8d8d;
+        margin: 5px 0px 5px 0px;
+        height: 200px;
+        padding: 20px;
+    }
+    #other-contacts{
+        font-size: 70px;
+        position: relative;
+        left: 50px;
+    }
+    #name,
+    #email{
+        height: 50px;
+        width: 100%;
+        border: 0px;
+        color: #8d8d8d;
+        padding: 20px;
+        background-color: #2b2b2b;
+        font-size: 20px;
+    }
+    #email{
+        position: relative;
+        margin-top: 5px;
+    }
+    .ig-logo,
+    .in-logo,
+    .gt-logo,
+    .email-logo{
+        width: 55px;
+        height: 55px;
+    }
+    .email{
+        display: flex;
+        flex-direction: row;
+    }
+    .email p{
+        margin: 0 0 0 20px;
+        font-size: 40px;
+        color: #8d8d8d;
+    }
+    #sendbtn:hover{
+        background-color: #21EFEF;
+        color: black;
+    }
+    #short-message{
+        position: relative;
+        left: 25px;
+        font-size: 40px;
+    }
+    #contact-form{
+        position: relative;
+        left: 130px;
+    }
+    #ig-profile,
+    #in-profile,
+    #gt-profile{
+        font-size: 40px;
+        position: relative;
+        right: 15px;
+        bottom: 15px;
+    }
+    h2{
+        font-size: 100px;
+        color:#21EFEF;
+    }
+    .tag1cp,
+    .tag2cp,
+    .tag3cp,
+    .tag4cp,
+    .tag5cp,
+    .tag6cp{
+        font-size: 35px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+    #login{
+        padding-left: 25px; 
+    }
+    .tag1logp,
+    .tag2logp,
+    .tag3logp,
+    .tag4logp,
+    .tag5logp,
+    .tag6logp{
+        font-size: 35px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+    .tag6logp{
+        position: relative;
+    }
+    .tag5logp{
+        position: relative;
+        left: 35px;
+    }
+    .tag4logp,
+    .tag3logp{
+        position: relative;
+    }
+    .login-container{
+        background-color: #2B2B2B;
+        width: 150%;
+        padding: 20px 0px 70px 0px;
+        border-radius: 15px; 
+        position: relative;  
+    }
+    #login-email,
+    #login-password{
+        font-size: 35px;
+        width: 90%;
+        padding: 25px;
+        border-bottom: 2px solid black;
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+        background-color: #2B2B2B;
+        position: relative;
+        left: 20px;
+    }
+    #loginbtn{
+        background-color: #2B2B2B;
+        color: #21EFEF;
+        width: 80%;
+        height: 50px;
+        font-size: 35px;   
+        position: relative;
+        top: 10px;
+        left: 40px;
+        border: 1px solid #21EFEF;
+        border-radius: 10px;
+        display: flex;
+        padding-bottom: 5px;
+        justify-content: center;
+    }
+    #login-form{
+        position: relative;
+        left: 95px;
+    }
+    .login-container h3{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        padding-bottom: 30px;
+        font-size: 40px;
+    }
+    .loginmsg{
+        font-size: 35px;
+        position: relative;
+        top: 20px;
+        display: flex; 
+        justify-content: center;
+    }
+    #loginbtn:hover{
+        background-color: #21EFEF;
+        color: black; 
+    }
+    .invalid input{
+        border: 1px solid red !important;
+    }
+    #error-msg{
+        font-size: 30px;
+        color: red;
+        display: block;
+        text-align: center;
+
+    }
+    .success input{
+        border: 1px solid greenyellow !important;
+    }
+    #error-msg1,
+    #error-msg2,
+    #error-msg3{
+        font-size: 15px;
+        color: red;
+    }
+    .invalid-contacts {
+        border: 1px solid red !important;
+    }
+}
+@media only screen and (min-width: 541px) and (max-width: 961px){
+    body{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .logo{
+        width:200px;
+        position: relative;
+        left: 340px;
+        display: flex;
+        justify-content: center;
+    }
+    #navbar p{
+        font-size: 40px;
+        padding: 10px 0px 20px 0px;
+        position: relative;
+        left: 300px;
+        display: flex;
+    }
+    #navbar{
+        display: flex;
+        flex-direction: column;
+        width:332%;
+        background-color: #181818;
+        color: #999696;
+        display: none;
+        position: fixed;
+        z-index: 10;
+    }
+    .dropdown{
+        display: none;
+    }
+    .dropdown:checked ~ #navbar{
+        display: block;
+    }
+    a{
+        text-decoration: none;
+        color: #999696;
+        padding-left: 20px;
+        font-size: 30px;
+    }
+    a.work,
+    a.blogs,
+    a.contacts,
+    a.login{
+        padding: 20px 0px 20px 0px;
+        display: flex;
+    }
+    a.about-me{
+        padding: 60px 0px 20px 0px;
+        display: flex;
+    }
+    a.work,
+    a.blogs,
+    a.contacts,
+    a.login,
+    a.about-me{
+        display: flex;
+        justify-content: center;
+        position: relative;
+        right: 1030px;
+        font-size: 40px;
+    }
+    a:hover{
+        color: #21EFEF;
+    }
+    #home{
+        background-color: black;        
+    }
+    .dropdown-nav{
+        width: 50px;
+        position: fixed;
+        left: 780px;
+        top: 10px;
+        color: #21EFEF;
+        background-color: #21EFEF;
+        z-index: 10;
+    }
+    .inner-logo{
+        width: 80px;
+        position: relative;
+        top: 28px;
+    }
+    #h1{
+        position: relative;
+        top: 35px;
+    }
+    .tag1lp,
+    .tag2lp,
+    .tag3lp,
+    .tag4lp,
+    .tag5lp,
+    .tag6lp{
+        font-size: 35px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+    #p{
+        font-size: 30px;
+        position: relative;
+        left: 40px;
+        color: #999696;
+    }
+    
+    .tag2lp{
+        position: relative;
+        left: 15px;
+    }
+    .tag3lp{
+        position: relative;
+        left: 30px;
+    }
+    .tag4lp{
+        position: relative;
+        left: 30px;
+    }
+    .tag5lp{
+        position: relative;
+        left: 25px;
+    }
+    .tag6lp{
+        position: relative;
+        left: 25px;
+    }
+    .welcome,
+    #h1{
+        font-size: 110px;
+        font-weight: bolder;
+    }
+    #landing-page{
+        padding-left: 25px;
+    }
+    #about-me{
+        padding-left: 25px;
+    }
+    #about-me h2{
+        color:#21EFEF;
+        font-size: 100px;
+    }
+    .tag1ap,
+    .tag2ap,
+    .tag3ap,
+    .tag4ap{
+        font-size: 35px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+    .description{
+        font-size: 40px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
+    #skills{
+        font-size: 35px;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        padding: 20px;
+    }
+    #skills p{
+        padding: 5px;
+    }
+    .picture{
+        width: 90%;
+        position: relative;
+        left: 20px;
+        display: flex;
+        justify-content: center;
+    }
+    #work{
+        padding-left: 25px;
+        position: relative;
+    }
+    #work h2{
+        color: #21EFEF;
+        font-size: 100px;
+    }
+    .work-description{
+        font-size: 40px;
+        position: relative;
+        left: 45px;
+    }
+    
+    .projects{
+        display: flex;
+        color: #1D1D1D;
+        position: relative;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .project1,
+    .project2,
+    .project3,
+    .project4{
+        background-color: #FFFFFF;
+        margin: 20px;
+        position: relative;
+        border-radius: 10px;
+        left: 50px;
+        box-shadow: 10px 10px 5px black;
+    }
+    .project-img{
+        height: 600px;
+        margin-bottom: 5px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        border-radius: 10px 10px 0px 0px ;
+    }
+    .p1-img,
+    .p2-img,
+    .p3-img,
+    .p4-img{
+        background-image: url("/assets/images/project-image.png");
+    }
+    .projects h3{
+        display: block;
+        text-align: center;
+        color: black;
+        font-size: 40px;
+    }
+    .project-link{
+        font-size: 35px;
+        display: block;
+        text-align: center;
+        position: relative;
+        background-color: #21EFEF;
+        border-radius: 0px 0px 10px 10px ;
+        color: #21EFEF;
+    }
+    .project1:hover,
+    .project2:hover,
+    .project3:hover,
+    .project4:hover{
+        transform: scale(1.05);
+    }   
+    .project1:hover > a,
+    .project2:hover > a,
+    .project3:hover > a,
+    .project4:hover > a{
+        color: black;
+    }
+    .tag1w,
+    .tag2w,
+    .tag3w,
+    .tag4w,
+    .tag5w,
+    .tag6w{
+        font-size: 35px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+    #blogs{
+        padding-left: 10px;
+    }
+    .b-title{
+        color: #21EFEF;
+        font-size: 100px;
+    }
+    .blog-container{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        position: relative;
+        left: 20px;
+
+    }
+    .blog h1,
+    .blog h2{
+        color: black;
+        font-size: 20px;
+        padding: 5px 20px 0px 20px;
+        display: block;
+        text-align: center;
+    }
+    .blog p,
+    .blog h3{
+        color: black;
+        font-size: 20px;
+        padding: 10px 20px 0px 20px;
+    }
+    .blog{
+        background-color: #999696;
+        border-radius: 10px;
+        box-shadow: 10px 10px 5px black;
+        margin: 10px;
+        
+    }
+    #no-blog-list{
+        display: block;
+        text-align: center;
+        font-size: 50px;
+        padding: 5px;
+        position: relative;
+        width: fit-content;
+        left: 250px;
+    }
+    .blog-view{
+        color: #D9D9D9;
+        font-size: 30px;
+        display: block;
+    }
+    .blog{
+        background-color: #999696;
+        box-shadow: 15px 15px 10px black;
+        border-radius: 15px;
+    }
+    .tag1bp,
+    .tag2bp,
+    .tag3bp,
+    .tag4bp{
+        font-size: 35px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+    #contacts{
+        padding-left: 25px;
+        position: relative;
+    }
+    #contacts h2{
+        color: #21EFEF;
+        font-size: 100px;
+    }
+    #sendbtn{
+        background-color: #1D1D1D;
+        color: #21EFEF;
+        width: 50%;
+        height: 50px;
+        font-size: 25px;   
+        position: relative;
+        left: 395px;
+        border: 1px solid #21EFEF;
+    }
+    #message{
+        width: 100%;
+        border: 0;
+        background-color: #2b2b2b;
+        font-size: 20px;
+        color: #8d8d8d;
+        margin: 5px 0px 5px 0px;
+        height: 200px;
+        padding: 20px;
+    }
+    #other-contacts{
+        font-size: 70px;
+        position: relative;
+        left: 50px;
+    }
+    #name,
+    #email{
+        height: 50px;
+        width: 100%;
+        border: 0px;
+        color: #8d8d8d;
+        padding: 20px;
+        background-color: #2b2b2b;
+        font-size: 20px;
+    }
+    #email{
+        position: relative;
+        margin-top: 5px;
+    }
+    .ig-logo,
+    .in-logo,
+    .gt-logo,
+    .email-logo{
+        width: 55px;
+        height: 55px;
+    }
+    .email{
+        display: flex;
+        flex-direction: row;
+    }
+    .email p{
+        margin: 0 0 0 20px;
+        font-size: 40px;
+        color: #8d8d8d;
+    }
+    #sendbtn:hover{
+        background-color: #21EFEF;
+        color: black;
+    }
+    #short-message{
+        position: relative;
+        left: 25px;
+        font-size: 40px;
+    }
+    #contact-form{
+        position: relative;
+        left: 15px;
+    }
+    #ig-profile,
+    #in-profile,
+    #gt-profile{
+        font-size: 40px;
+        position: relative;
+        right: 15px;
+        bottom: 15px;
+    }
+    h2{
+        font-size: 100px;
+        color:#21EFEF;
+    }
+    .tag1cp,
+    .tag2cp,
+    .tag3cp,
+    .tag4cp,
+    .tag5cp,
+    .tag6cp{
+        font-size: 35px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+    #login{
+        padding-left: 25px; 
+    }
+    .tag1logp,
+    .tag2logp,
+    .tag3logp,
+    .tag4logp,
+    .tag5logp,
+    .tag6logp{
+        font-size: 35px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+    .tag6logp{
+        position: relative;
+    }
+    .tag5logp{
+        position: relative;
+        left: 35px;
+    }
+    .tag4logp,
+    .tag3logp{
+        position: relative;
+    }
+    .login-container{
+        background-color: #2B2B2B;
+        width: 150%;
+        padding: 20px 0px 70px 0px;
+        border-radius: 15px; 
+        position: relative;  
+    }
+    #login-email,
+    #login-password{
+        font-size: 35px;
+        width: 90%;
+        padding: 25px;
+        border-bottom: 2px solid black;
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+        background-color: #2B2B2B;
+        position: relative;
+        left: 20px;
+    }
+    #loginbtn{
+        background-color: #2B2B2B;
+        color: #21EFEF;
+        width: 80%;
+        height: 50px;
+        font-size: 35px;   
+        position: relative;
+        top: 10px;
+        left: 40px;
+        border: 1px solid #21EFEF;
+        border-radius: 10px;
+        display: flex;
+        padding-bottom: 5px;
+        justify-content: center;
+    }
+    #login-form{
+        position: relative;
+        left: 100px;
+    }
+    .login-container h3{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        padding-bottom: 30px;
+        font-size: 40px;
+    }
+    .loginmsg{
+        font-size: 35px;
+        position: relative;
+        top: 20px;
+        display: flex; 
+        justify-content: center;
+    }
+    #loginbtn:hover{
+        background-color: #21EFEF;
+        color: black; 
+    }
+    .invalid input{
+        border: 1px solid red !important;
+    }
+    #error-msg{
+        font-size: 35px;
+        color: red;
+        display: block;
+        text-align: center;
+
+    }
+    .success input{
+        border: 1px solid greenyellow !important;
+    }
+    #error-msg1,
+    #error-msg2,
+    #error-msg3{
+        font-size: 15px;
+        color: red;
+    }
+    .invalid-contacts {
+        border: 1px solid red !important;
+    }
+}
+@media only screen and (min-width: 961px){
+    .logo{
+        width:100px;
+    }
+    #navbar p{
+        font-size: 15px;
+        padding: 10px 0px 20px 20px;
+    }
+    #navbar{
+        display: flex;
+        flex-direction: column;
+        width: 10%;
+        position: fixed;
+        height: 700px;
+        background-color: #181818;
+        color: #999696;
+    }
+    .dropdown{
+        display: none;
+    }
+    a{
+        text-decoration: none;
+        color: #999696;
+        padding-left: 20px;
+    }
+    a.work,
+    a.blogs,
+    a.contacts,
+    a.login{
+        padding: 20px 0px 20px 0px;
+        display: flex;
+        justify-content: center;
+    }
+    a.about-me{
+        padding: 60px 0px 20px 0px;
+        display: flex;
+        justify-content: center;
+    }
+    .dropdown-nav{
+        display: none;
+    }
+    #home{
+        background-color: black;
+    }
+    a:hover{
+        color: #21EFEF;
+    }
+    #landing-page{
+        height: 700px;
+    }
+    .inner-logo{
+        width: 80px;
+        position: relative;
+        top: 28px;
+    }
+    #h1{
+        position: relative;
+        top: 50px;
+    }
+    .tag1lp,
+    .tag2lp,
+    .tag3lp,
+    .tag4lp,
+    .tag5lp,
+    .tag6lp{
+        font-size: 15px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+    #p{
+        font-size: 23px;
+        padding-left: 220px;
+        position: relative;
+        bottom: 40px;
+        color: #999696;
+    }
+    .tag1lp{
+        position: relative;
+        top: 20px;
+        left: 170px;
+    }
+    .tag2lp{
+        position: relative;
+        top: 20px;
+        left: 190px;
+    }
+    .tag3lp{
+        position: relative;
+        top: 70px;
+        left: 200px;
+    }
+    .tag4lp{
+        position: relative;
+        left: 680px;
+        bottom: 40px;
+    }
+    .tag5lp{
+        position: relative;
+        left: 200px;
+        bottom: 35px;
+    }
+    .tag6lp{
+        position: relative;
+        left: 200px;
+        bottom: 35px;
+    }
+    .welcome,
+    #h1{
+        font-size: 100px;
+        font-weight: bolder;
+        padding-left: 200px;
+    }
+    #contacts{
+        height: 700px;
+        font-size: 30px;
+        padding-left: 200px;
+    }
+    #sendbtn{
+        background-color: #1D1D1D;
+        color: #21EFEF;
+        width: 24.7%;
+        height: 50px;
+        font-size: 25px;   
+        position: relative;
+        left: 315px;
+        border: 1px solid #21EFEF;
+    }
+    #message{
+        width: 50%;
+        border: 0;
+        background-color: #2b2b2b;
+        font-size: 20px;
+        color: #8d8d8d;
+        margin: 5px 0px 5px 0px;
+        height: 150px;
+        padding: 20px;
+    }
+    #other-contacts{
+        font-size: 50px;
+        position: relative;
+        bottom: 300px;
+        left: 750px;
+    }
+    #name,
+    #email{
+        height: 40px;
+        width: 50%;
+        border: 0px;
+        color: #8d8d8d;
+        padding: 20px;
+        background-color: #2b2b2b;
+        font-size: 20px;
+    }
+    .ig-logo,
+    .in-logo,
+    .gt-logo,
+    .email-logo{
+        width: 35px;
+        height: 35px;
+    }
+    .email{
+        display: flex;
+    }
+    .email p{
+        margin: 0 0 0 10px;
+        font-size: 30px;
+        color: #8d8d8d;
+    }
+    #sendbtn:hover{
+        background-color: #21EFEF;
+        color: black;
+    }
+    #short-message{
+        position: relative;
+        top: 10px;
+    }
+    #contact-form{
+        position: relative;
+        top: 10px;
+    }
+    #ig-profile,
+    #in-profile,
+    #gt-profile{
+        font-size: 30px;
+        position: relative;
+        right: 25px;
+        bottom: 5px;
+    }
+    h2{
+        font-size: 90px;
+        color:#21EFEF;
+    }
+    .tag1cp,
+    .tag2cp,
+    .tag3cp,
+    .tag4cp,
+    .tag5cp,
+    .tag6cp{
+        font-size: 15px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+    #login{
+        height: 700px;
+        font-size: 30px;
+        padding-left: 200px; 
+    }
+    .tag1logp,
+    .tag2logp,
+    .tag3logp,
+    .tag4logp,
+    .tag5logp,
+    .tag6logp{
+        font-size: 15px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+    .tag6logp{
+        position: relative;
+        right: 30px;
+    }
+    .tag5logp{
+        position: relative;
+        right: 10px;
+    }
+    .login-container{
+        background-color: #2B2B2B;
+        width: 30%;
+        padding: 20px 0px 130px 0px;
+        border-radius: 15px;    
+    }
+    #login-email,
+    #login-password{
+        font-size: 20px;
+        height: 40px;
+        width: 80%;
+        padding: 25px;
+        border-bottom: 2px solid black;
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+        background-color: #2B2B2B;
+        position: relative;
+        left: 40px;
+    }
+    #loginbtn{
+        background-color: #2B2B2B;
+        color: #21EFEF;
+        width: 60%;
+        height: 40px;
+        font-size: 20px;   
+        position: relative;
+        left: 70px;
+        top: 40px;
+        border: 1px solid #21EFEF;
+        border-radius: 10px;
+    }
+    #login-form{
+        position: relative;
+        left: 400px;
+    }
+    .login-container h3{
+        position: relative;
+        left: 150px;
+        padding-bottom: 30px;
+    }
+    .loginmsg{
+        font-size: 20px;
+        position: relative;
+        top: 70px;
+        left: 100px  
+    }
+    #loginbtn:hover{
+        background-color: #21EFEF;
+        color: black; 
+    }
+    #about-me{
+        height: 700px;
+        font-size: 30px;
+        padding-left: 200px;
+    }
+    .tag1ap,
+    .tag2ap,
+    .tag3ap,
+    .tag4ap{
+        font-size: 15px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+    .tag3ap{
+        position: relative;
+        bottom: 400px;
+    }
+    .tag4ap{
+        position : relative;
+        bottom: 395px;
+    }
+    .description{
+        font-size: 20px;
+        position: relative;
+        bottom: 400px;
+    }
+    #skills{
+        font-size: 25px;
+        display: flex;
+        justify-content: space-around;
+        position: relative;
+        bottom: 370px;
+        right: 40px;
+    }
+    .picture{
+        width: 320px;
+        height: 400px;
+        position: relative;
+        left: 650px;
+    }
+    #blogs{
+        font-size: 30px;
+        padding-left: 200px;        
+    }
+    .blog-container{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .blog h1,
+    .blog h2{
+        color: black;
+        font-size: 20px;
+        padding: 5px 20px 0px 20px;
+        display: block;
+        text-align: center;
+    }
+    .blog p,
+    .blog h3{
+        color: black;
+        font-size: 20px;
+        padding: 10px 20px 0px 20px;
+    }
+    .blog{
+        background-color: #999696;
+        border-radius: 10px;
+        box-shadow: 10px 10px 5px black;
+        margin: 10px;
+        
+    }
+    .blog-view{
+        color: #D9D9D9;
+        font-size: 30px;
+        display: block;
+    }
+    
+    .tag1bp,
+    .tag2bp,
+    .tag3bp,
+    .tag4bp{
+        font-size: 15px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+    #no-blog-list{
+        display: block;
+        text-align: center;
+        font-size: 40px;
+        padding: 5px;
+    }
+    #work{
+        font-size: 30px;
+        padding-left: 200px;
+        height: 700px;
+    }
+    .work-description{
+        font-size: 20px;
+    }
+    .tag1w,
+    .tag2w,
+    .tag3w,
+    .tag4w,
+    .tag5w,
+    .tag6w{
+        font-size: 15px;
+        font-family: "La Belle Aurore";
+        color: #807e7e;
+    }
+    
+    .projects{
+        display: flex;
+        color: #1D1D1D;
+        position: relative;
+        right: 25px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .project1,
+    .project2,
+    .project3,
+    .project4{
+        background-color: #FFFFFF;
+        width: 20%;
+        margin: 10px;
+        position: relative;
+        border-radius: 10px;
+        box-shadow: 10px 10px 5px black;
+    }
+    .project-img{
+        height: 250px;
+        margin-bottom: 5px;
+        background-size: cover;
+        border-radius: 10px 10px 0px 0px ;
+    }
+    .p1-img,
+    .p2-img,
+    .p3-img,
+    .p4-img{
+        background-image: url("/assets/images/project-image.png");
+    }
+    .projects h3{
+        display: block;
+        text-align: center;
+        color: black;
+        font-size: 30px;
+    }
+    .project-link{
+        font-size: 20px;
+        display: block;
+        text-align: center;
+        position: relative;
+        background-color: #21EFEF;
+        border-radius: 0px 0px 10px 10px ;
+        color: #21EFEF;
+    }
+    .project1:hover,
+    .project2:hover,
+    .project3:hover,
+    .project4:hover{
+        transform: scale(1.05);
+    }   
+    .project1:hover > a,
+    .project2:hover > a,
+    .project3:hover > a,
+    .project4:hover > a{
+        color: black;
+    }
+    .invalid-logins input{
+        border: 1px solid red !important;
+    }
+    #error-msg{
+        font-size: 15px;
+        color: red;
+        display: block;
+        text-align: center;
+
+    }
+    .success input{
+        border: 1px solid greenyellow !important;
+    }
+
+    #error-msg1,
+    #error-msg2,
+    #error-msg3{
+        font-size: 15px;
+        color: red;
+    }
+    .invalid-contacts {
+        border: 1px solid red !important;
+    }
+      
+
+}
+
+        </style>
+    </head>
+    <body>
+        <header>
+            <input type="checkbox" id="dropdown-nav" class="dropdown">
+            <nav id="navbar">
+                <div id="home">
+                    <a class="landing-page" href="#landing-page"> 
+                        <img class="logo" src="/assets/images/logo.png">
+                     </a>
+                     <p>Web Developer</p>
+                </div>
+                <a class="about-me" href="#about-me">About Me</a><hr>
+                <a class="work" href="#work"> My Work</a><hr>
+                <a class="blogs" href="#blogs">Blogs</a><hr>
+                <a class="contacts" href="#contacts">Contacts</a><hr>
+                <a class="login" href="#login">Login</a><hr>
+            </nav>
+            <label for="dropdown-nav" class="dropdown-nav">
+                <img class="dropdown-nav" src="/assets/images/menu.png">
+            </label>
+            
+        </header>
+
+         <section id="landing-page">
+             <p class="tag1lp">&lthtml&gt</p>
+             <p class="tag2lp">&ltbody&gt</p>
+             <p class="tag3lp">&lth1&gt</p>
+            <h1 id="h1"><strong>Hi,</strong></h1>
+            <h1 class="welcome"><strong>I'm <img class="inner-logo" src="/assets/images/B.png">oris</strong></h1>
+            <h1 class="welcome"><strong>Web Developer</strong><p class="tag4lp">&lth1/&gt</p></h1>
+            <p class="tag5lp">&ltp&gt</p>
+            <p id="p">Front &nbsp End &nbsp Developer &nbsp / &nbsp WordPress &nbsp Expert</p>
+            <p class="tag6lp">&ltp/&gt</p>
+           
+        </section>
+
+        <section id="about-me">
+            <p class="tag1ap">&lth2&gt</p>
+            <h2>About Me</h2>
+            <p class="tag2ap">&lt/h2&gt</p>
+            <div id="profile-picture">
+                <img class="picture" src="/assets/images/Profile.JPG">
+            </div>
+            <p class="tag3ap">&ltp&gt</p>
+            <p class="description">My name is Kirenga Boris.<br>
+                I am a Rwandan Software Developer<br>
+                Currently taking trainings at Andela.<br>
+                <br>consectetur adipiscing elit, sed do<br>
+                 eiusmod tempor incididunt ut labore<br>
+                  et dolore magna aliqua. Ut enim ad <br>
+                  minim veniam, quis nostrud exercitation <br>
+                  ullamco laboris nisi ut aliquip ex ea<br>
+                   commodo consequat.<br>
+                <br>consectetur adipiscing elit, sed do <br>
+                eiusmod tempor incididunt ut <br>
+                labore et dolore magna aliqua. <br>
+                Ut enim ad minim veniam, quis <br>
+                nostrud exercitation ullamco laboris.
+            </p>
+            <p class="tag4ap">&lt/p&gt</p>
+            <div id="skills">
+                <p>HTML</p>
+                <p>CSS</p>
+                <p>JavaScript</p>
+                <p>ReactJS</p>
+                <p>JSON</p>
+                <p>PHP</p>
+                <p>ES5/ES6</p>
+            </div>
+           
+        </section>
+
+        <section id="work">
+            <p class="tag1w">&lth2&gt</p>
+            <h2> My Work</h2>
+            <p class="tag2w">&lt/h2&gt</p>
+            <p class="tag3w">&ltp&gt</p>
+            <p class="work-description">Here are the projects I worked on,<br>
+                Some were done by me and others I was <br>
+                among the team that worked on them.
+            </p>
+            <p class="tag4w">&lt/p&gt</p>
+            <p class="tag5w">&ltsection&gt</p>
+            <div class="projects">
+                <div class="project1">
+                    <div class="project-img p1-img"></div>
+                    <h3>Music App</h3>
+                    <a class="project-link" href="#">View Project</a>
+                </div>
+                <div class="project2">
+                    <div class="project-img p2-img"></div>
+                    <h3>Music App</h3>
+                    <a class="project-link" href="#">View Project</a>
+                </div>
+                <div class="project3">
+                    <div class="project-img p3-img"></div>
+                    <h3>Music App</h3>
+                    <a class="project-link" href="#">View Project</a>
+                </div>
+                <div class="project4">
+                    <div class="project-img p4-img"></div>
+                    <h3>Music App</h3>
+                    <a class="project-link" href="#">View Project</a>
+                </div>
+            
+            </div>
+            <p class="tag6w">&lt/section&gt</p>
+        </section>
+
+        <section id="blogs">
+            <p class="tag1bp">&lth2&gt</p>
+            <h2 class="b-title">Blogs</h2>
+            <p class="tag2bp">&lt/h2&gt</p>
+            <p id="no-blog-list">No Blogs Yet</p>
+            <!-- blog list is rendered here -->
+        </section>
+
+        <section id="contacts">
+            <p class="tag1cp">&lth2&gt</p>
+            <h2><strong>Contact Me</strong></h2>
+            <p class="tag2cp">&lth2/&gt</p>
+            
+            <div id="short-message">
+                <p class="tag3cp">&ltp&gt</p>
+                <p>I'm interested in freelance opportunities.<br>
+                    However, if you have other request or question,<br>
+                    Feel free to use the form.
+                </p>
+                <p class="tag4cp">&ltp/&gt</p>
+            </div>
+            
+            <form id="contact-form">
+                <p class="tag5cp">&ltform&gt</p>
+                <div id="names-label">
+                    <input id="name" name="names"type="text" placeholder="Name">
+                    <div id="error-msg1"></div>
+                </div>
+                <div id="emails-label">
+                    <input id="email" name="email" placeholder="Email"><br>
+                    <div id="error-msg2"></div>
+                </div>
+                <div id="message-label">
+                    <textarea id="message" name="message" placeholder="Message"></textarea><br>
+                    <div id="error-msg3"></div>
+                </div>
+               
+                <button id="sendbtn" type="submit">Send Message</button>
+                <p class="tag6cp">&ltform/&gt</p>
+            </form>
+            
+            <div id="other-contacts">
+                <div class="instagram">
+                    <img class="ig-logo" src="/assets/images/instagram.png">
+                    <a id="ig-profile" href="https://www.instagram.com/k.boris5/?hl=en" target="blank">Instagram</a>
+                </div>
+                <div class="linkedin">
+                    <img class="in-logo" src="/assets/images/linkedin.png">
+                    <a id="in-profile" href="https://www.linkedin.com/in/boris-kirenga-b069341b1/" target="blank">Linkedin</a>
+                </div>
+                <div class="github">
+                    <img class="gt-logo" src="/assets/images/github.png">
+                    <a id="gt-profile" href="https://github.com/kirengaboris" target="blank">Github</a>
+                </div>
+                <div class="email">
+                    <img class="email-logo" src="/assets/images/gmail.png">
+                    <p id="email-link">kirengaboris5@gmail.com</p>
+                </div>
+            </div>
+        </section> 
+
+        <section id="login">
+            <p class="tag1logp">&lth2&gt</p>
+            <h2>Login</h2>
+            <p class="tag2logp">&lt/h2&gt</p>
+            <form id="login-form">
+                <p class="tag3logp">&ltform&gt</p>
+                <div class="login-container">
+                    <h3>Login</h3>
+                    <div id="email-label">
+                        <input id="login-email" name="email" placeholder="Email" /><br>
+                        <div id="error-msg"></div>
+                    </div>
+
+                   <div id="password-label">
+                    <input id="login-password" name="password" type="password" placeholder="Password"><br>
+                    <div id="error-msg"></div>
+                   </div>
+                    
+                    <button id="loginbtn" type="submit">Login</button>
+                    <p class="loginmsg">Forgot Password?</p>
+                </div>
+                <p class="tag4logp">&lt/form&gt</p> 
+            </form>
+            <p class="tag5logp">&lt/body&gt</p>
+            <p class="tag6logp">&lt/html&gt</p>
+
+        </section>
+
+       
+
+
+        <script >
+
+const blogList = document.getElementById("blogs");
+const noBlogListMessage = document.getElementById("no-blog-list");
+
+let blogsArray = JSON.parse(localStorage.getItem("Blogs"))??[];
+
+let blogContainer = document.createElement("div");
+    blogContainer.classList.add("blog-container");
+
+    <section id="blogs">
+            <p class="tag1bp">&lth2&gt</p>
+            <h2 class="b-title">Blogs</h2>
+            <p class="tag2bp">&lt/h2&gt</p>
+            <p id="no-blog-list">No Blogs Yet</p>
+            <!-- blog list is rendered here -->
+        </section>
+
+if(blogsArray.length > 0){
+    noBlogListMessage.style.display = "none"
+    for (let i = 0; i < blogsArray.length; i++) {
+        let blog = blogsArray[i];
+        let blogCardEl = document.createElement("div");
+        blogCardEl.classList.add("blog");
+        let singleBlog = document.createElement("div");
+        singleBlog.classList.add("single-blog");
+        
+        let blogLink =document.createElement("li")
+        blogLink.classList.add("blog-view");
+        blogCardEl.innerHTML = `<h1>${blog.topic}</h1>
+                                <h2>${blog.title}</h2>
+                                <p class="teaser">${blog.summary}</p>`;
+        singleBlog.appendChild(blogCardEl);
+        blogLink.innerHTML = `<a href="/ui/client/single-blog-view.html#${blog.blogId}" target="_blank">Read More</a>`;
+        singleBlog.appendChild(blogLink);
+        blogContainer.appendChild(singleBlog);
+    }
+    blogList.appendChild(blogContainer);   
+}
+
+let linkVisits = JSON.parse(localStorage.getItem("linkVisits")) || {
+    link1: 0,
+    link2: 0,
+    link3: 0
+  };
+  
+  function trackLinkVisit(linkId) {
+    linkVisits[linkId]++;
+    localStorage.setItem("linkVisits", JSON.stringify(linkVisits));
+  }
+        </script>
+        <script src="/ui/auth/login.js"></script>
+        <script src="/ui/auth/contact.js"></script>
+
+    </body>
+</html>
+
+<!-- <div class="likes"> -->
+                    <!-- <img class="likes-logo" id="likes-logo1"src="/assets/images/like.png"> -->
+                    <!-- <p class="likes-num" id="likes-num1">20</p> -->
+                <!-- </div> -->
+                <!-- <div class="comment"> -->
+                    <!-- <img class="comments-logo" id="comments-logo1"src="/assets/images/comments.png"> -->
+                     <!-- <p class="comments-num" id="comments-num1">10</p> -->
+                <!-- </div> -->
+                     
+                 <!-- <a class="blog-view" id="blog-view1"href="/ui/client/single-blog-view.html">Read more</a> -->
+
+                 <!-- <div class="summary1" id="summary">
+                <div class="blog1">
+                   
+                </div>
+                
+            </div> -->

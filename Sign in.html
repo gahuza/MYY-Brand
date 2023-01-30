@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>http//poltifolio.com</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-with,initial-scale=1.0">
+        <link rel="stylesheet" href="./assets/css/blog.css" type="text/css">
+        <style>
+            .maiin{
+                width: 100%;
+            }
+            @media  screen and (max-width: 800px) {
+
+body,.maiin,.detail1n, .headingn, .logo1,.contentsss,.loimg1,.loform1,.footer,.footer2,.footer3{width: 100%;}
+
+}
+@media screen and (max-width: 450px) {
+   
+    .headingn{
+    color: rgb(62, 69, 108);
+       font-weight: bold;
+       width: 100%;
+       height: 30%;
+       position: absolute;
+       top: 0px;
+       left: 12px;
+   }
+    .detail1n{
+
+background-color: white;
+color: BLACK;
+font-size: 18px;
+width: 70%;
+height: 70%;
+position: absolute;
+top: 30%;
+left: 6%;
+}
+   .loimg1{
+    width:45%;height: 58%;
+   position: absolute;
+   top: 10px;
+   left: 0px;
+   }
+   .logo1{
+    background-image: url(/assets/img/logoblog1.jpg);
+    background-repeat: no-repeat;
+       color: #4831d4;
+       font-weight: bold;
+       width: 65%;
+       height: 35%;
+       position: absolute;
+       top: 7px;
+   }
+.menuss{
+  
+  color: rgb(62, 69, 108);
+  font-weight: bold;
+  width: 100%;
+  height: 57%;
+  position: absolute;
+  top: 47%;
+  left: 7%;
+}
+.contentsss{
+ 
+ font-size: 20px;
+ width: 50%;
+ height: 30%;
+ position: absolute;
+ top: 65%;
+ left: 7%;
+}
+.loform1{
+
+background-color: white;
+color: hsl(0, 0%, 90%);
+font-size: 18px;
+width: 80%;
+height: 98%;
+position: absolute;
+top: 10px;
+left: 45%;
+}
+.form2{
+    position: absolute;top: 20%;left: 0px;
+}
+
+}
+        </style>
+    </head>
+    <body >
+        <div class="maiin">
+        
+        <div class="headingn">
+            <div class="logo1"><img src="./assets/img/signuplo.jpg" style="height:98px;width: 350px;"></div>
+            <div class="menuss">
+                <ol>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About me</a></li>
+                    <li><a href="Contact.html">Contact</a></li>
+                </ol> 
+            </div>
+            <div class="contentsss"> <font color="red">Create Account</font> </div>
+            </br> </br></br></br></br></br><hr/>
+        </div>
+       
+            <div class="detail1n">
+     
+        <div class="loimg1"><img src="./assets/img/backroundim3.jpg" style="width:100%;height: 100%;"></div>
+        <div class="loform1"><label class="label">
+           &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <label><font color="rgb(236, 33, 175);"><font color="red"><a href="Sign in.html">Sign up</a></font></label>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+           &nbsp &nbsp &nbsp &nbsp  <label><a href="login.html">LOGIN</a></label>
+        </label>
+          
+            <form class="form2" name="form2" id="form1" action=""method="GET" style="position: absolute;top: 20%;left: 40px;">
+               
+                <script defer  src="valid.js">  
+     
+                </script>
+                <div>
+                    <script defer  src="contact.js">  
+     
+                    </script>    
+            
+                <div class="error" id="error" style="width: 50%;height: 4%;position: relative;top: 0px;color:red;"></div>
+                <input type="text" name="txt1" id="fname"  value="Fname" style="width: 90%;border-top: 0ch;border-left: 0ch;border-right: 0ch;background-color: white;">&nbsp &nbsp &nbsp &nbsp &nbsp  
+                <div class="error" id="errorlname" style="width: 50%;height: 4%;position: relative;top: 0px;color:red;"></div>
+                <input type="text" name="txt1" id="lname"   value=" lname"  style="width: 90%;border-top: 0ch;border-left: 0ch;border-right: 0ch;background-color: white;"></br></br>
+               </div>
+               <div>
+                <div class="error" id="erroremail" style="width: 50%;height: 4%;position: relative;top: 0px;color:red;"></div>
+              <input type="text" name="txt1" id="email" placeholder="Email" onkeydown="validation()" style="width: 90%;border-top: 0ch;border-left: 0ch;border-right: 0ch;background-color: white;"></br></br>
+             
+               </div>
+               <div>
+                <div class="error1" id="error1" style="width: 90%;height: 4%;position: relative;top: f4px;color:red;"></div>
+               <input type="text" name="txt1" id="tel" value="Tel"  style="width: 90%;border-top: 0ch;border-left: 0ch;border-right: 0ch;background-color: white;"></br></br>
+               
+               </div>
+               <div>
+                <div class="error" id="errorpass" style="width: 70%;height: 4%;position: relative;top: 0px;color:red;"></div>
+               <input type="password" name="txt1" id="password" value="Enter user password"  style="width: 90%;border-top: 0ch;border-left: 0ch;border-right: 0ch;background-color: white;"></br></br>
+                
+               </div>
+              
+                <label>BY Creating an account you agree to our agreement and you have read our privacy policy</label>
+            </br></br>
+                &nbsp &nbsp &nbsp &nbsp &nbsp
+                <div>
+                <button type="submit" name="btn1" style="width: 30%;height:36px; background-color: red;border-radius: 14%;border:0px solid;font-size: 15px;color:white;">Create Account</button> </br></br>
+           
+            </div>   </form>
+        </div>
+    </div>
+                   
+            
+    
+ 
+<div class="footer">
+    <div class="footer1">Visit me on
+    </br>Gahuzaj12@gmail.com
+
+    </div>
+    <div class="footer2">
+        <ul>
+            <li><a href="home1.html">Home</a></li>
+            <li><a href="about.html">About US</a></li>
+            <li><a href="Contact.html">Contact us</a></li>
+            <li><a href="skills.html">Skills</a></li>
+            <li><a href="Blog.html">Blogs</a></li>
+        </ul>
+    </div>
+    <div class="footer3">
+        <hr/></br></br></br>
+       <label>GAHUZAMIRYANGO Jean de DIEU  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</label>
+         <label>TW &nbsp &nbsp GH &nbsp &nbsp LN &nbsp &nbsp YT</label>
+    </div>
+   
+</div> 
+
+</div>
+    </body>
+</html>

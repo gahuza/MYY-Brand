@@ -1,0 +1,95 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+
+#blogs{
+        font-size: 30px;
+        padding-left: 200px;        
+    }
+    .blog-view{
+        color: #D9D9D9;
+        font-size: 30px;
+        display: inline;
+    }
+    </style>
+</head>
+<body>
+
+    <section id="blogs">
+        <p class="tag1bp">&lth2&gt</p>
+      <h2 class="b-title">Blogs</h2>
+     <p class="tag2bp">&lt/h2&gt</p>
+     <p id="no-blog-list">No Blogs Yet</p>
+         <!-- blog list is rendered here -->
+          </section>
+    
+
+    <script >
+
+        const blogList = document.getElementById("blogs");
+        const noBlogListMessage = document.getElementById("no-blog-list");
+        
+        let blogsArray = JSON.parse(localStorage.getItem("board"))??[];
+        
+        let blogContainer = document.createElement("div");
+            blogContainer.classList.add("blog-container");
+        
+        
+        
+        if(blogsArray.length > 0){
+            noBlogListMessage.style.display = "none"
+            for (let i = 0; i < blogsArray.length; i++) {
+                let blog = blogsArray[i];
+                let blogCardEl = document.createElement("div");
+                blogCardEl.classList.add("blog");
+                let singleBlog = document.createElement("div");
+                singleBlog.classList.add("single-blog");
+                
+                let blogLink =document.createElement("li")
+                blogLink.classList.add("blog-view");
+                blogCardEl.innerHTML = `
+                <div class="col-3" style="    box-sizing: border-box;
+            box-shadow: rgb(238 238 238) 2px 2px 2px 2px inset, rgb(238 238 238) 3px 2px 4px;">
+            <td>
+                       
+                        
+                       <h1>${blog.text1}</h1>
+                                       <h2><img src="${blog.image}" width='270px'></h2>
+                                       <p class="teaser">${blog.summernote}</p>
+                                       </td>
+               </div>
+                    
+                         
+                        
+                    
+                 
+                
+               `;
+                singleBlog.appendChild(blogCardEl);
+                blogLink.innerHTML = `<a href="/ui/client/single-blog-view.html#${blog.blogId}" target="_blank">Read More</a>`;
+                singleBlog.appendChild(blogLink);
+                blogContainer.appendChild(singleBlog);
+            }
+            blogList.appendChild(blogContainer);   
+        }
+        
+        let linkVisits = JSON.parse(localStorage.getItem("linkVisits")) || {
+            link1: 0,
+            link2: 0,
+            link3: 0
+          };
+          
+          function trackLinkVisit(linkId) {
+            linkVisits[linkId]++;
+            localStorage.setItem("linkVisits", JSON.stringify(linkVisits));
+          }
+                </script>
+</body>
+</html>

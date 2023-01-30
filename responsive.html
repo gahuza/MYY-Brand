@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>home</title>
+  <style type="text/css">
+    .container{
+      width: 100%;
+      margin: auto;
+    }
+
+    .navbar {
+  width: 100%;
+  background-color: #555;
+  overflow: auto;
+}
+
+.navbar a {
+  float: left;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar a:hover {
+  background-color: #000;
+}
+
+.active {
+  background-color: #4d94ff;
+}
+
+@media screen and (max-width: 500px) {
+  .navbar a {
+    float: none;
+    display: block;
+  }
+}
+
+
+
+
+
+
+* {
+  box-sizing: border-box;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+[class*="col-"] {
+  float: left;
+  padding: 15px;
+  color:#ccf381;}
+[class*="col-3"] {
+  float: left;
+  background-color: yellow;
+  height: 60%;
+  padding: 15px;
+  color:#ccf381;
+}
+html {
+  font-family: "Lucida Sans", sans-serif;
+}
+
+.header {
+  background-color: #9933cc;
+  color: #ffffff;
+  padding: 15px;
+}
+
+
+
+
+.aside {
+  background-color: #33b5e5;
+  padding: 15px;
+  height:50%;
+  color: #ffffff;
+  text-align: center;
+  font-size: 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.footer {
+  background-color: #0099cc;
+  color: #ffffff;
+  text-align: center;
+  font-size: 12px;
+  padding: 15px;
+}
+
+/* For desktop: */
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  [class*="col-"] {
+    width: 100%;
+  }
+}
+
+
+
+
+
+* {
+  box-sizing: border-box;
+}
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #4831d4;
+  padding: 20px;
+}
+.containerr {
+  padding-left: 20px;
+  border-radius: 5px;
+  background-color: red;
+  padding: 20px;
+  left: 0%;
+}
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+    margin-right: 0px;
+  }
+}
+.vertical-menu {
+  width: 200px; /* Set a width if you like */
+}
+
+.vertical-menu a {
+  background-color: #eee; /* Grey background color */
+  color: black; 
+  display: block; 
+  padding: 12px; 
+  text-decoration: none;
+}
+
+.vertical-menu a:hover {
+  background-color: #ccc; /* Dark grey background on mouse-over */
+}
+
+.vertical-menu a.active {
+  background-color: #04AA6D; /* Add a green color to the "active/current" link */
+  color: white;
+}
+
+
+
+
+
+
+
+#menuToggle {
+  display: block;
+  position: relative;
+  top: 50px;
+  left: 50px;
+ 
+  z-index: 1;
+ 
+  -webkit-user-select: none;
+  user-select: none;
+}
+ 
+#menuToggle a {
+  text-decoration: none;
+  color: #232323;
+ 
+  transition: color 0.3s ease;
+}
+ 
+#menuToggle a:hover {
+  color: tomato;
+}
+ 
+#menuToggle input {
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+ 
+  cursor: pointer;
+ 
+  opacity: 0; /* hide this */
+  z-index: 2; /* and place it over the hamburger */
+ 
+  -webkit-touch-callout: none;
+}
+ 
+/*
+ * Just a quick hamburger
+ */
+#menuToggle span {
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+ 
+  background: #cdcdcd;
+  border-radius: 3px;
+ 
+  z-index: 1;
+ 
+  transform-origin: 4px 0px;
+ 
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+    background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
+}
+ 
+#menuToggle span:first-child {
+  transform-origin: 0% 0%;
+}
+ 
+#menuToggle span:nth-last-child(2) {
+  transform-origin: 0% 100%;
+}
+ 
+/* 
+ * Transform all the slices of hamburger
+ * into a crossmark.
+ */
+#menuToggle input:checked ~ span {
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: #232323;
+}
+ 
+/*
+ * But let's hide the middle one.
+ */
+#menuToggle input:checked ~ span:nth-last-child(3) {
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+ 
+/*
+ * Ohyeah and the last one should go the other direction
+ */
+#menuToggle input:checked ~ span:nth-last-child(2) {
+  transform: rotate(-45deg) translate(0, -1px);
+}
+ 
+/*
+ * Make this absolute positioned
+ * at the top left of the screen
+ */
+#menu {
+  position: absolute;
+  width: 200px;
+  margin: -100px 0 0 -50px;
+  padding: 50px;
+  padding-top: 125px;
+ 
+  background: #ededed;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  /* to stop flickering of text in safari */
+ 
+  transform-origin: 0% 0%;
+  transform: translate(0%, 0);
+ 
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+}
+ 
+#menu li {
+  padding: 10px 0;
+  font-size: 18px;
+}
+ 
+/*
+ * And let's slide it in from the left
+ */
+#menuToggle input:checked ~ ul {
+  transform: none;
+}
+.dashed-line{
+
+    color: #ccf381;
+    font-weight: bold;
+    
+}
+
+.line{
+    
+    border-width: 0.2rem solid green;
+    background-color: red;
+    border-style: solid;
+     position: absolute;
+     left:0%;
+     padding: 2px;
+     top: 0%;
+     width: 100%;
+     color: white;
+     height: 100%;
+     image-resolution: 39 30;
+ }
+
+ .imagee{
+     background-color:#b10e0e;
+     background-image: url(/assets/img/gahuza2.jpg);
+     background-repeat: no-repeat;
+     position: absolute;
+     left:0%;
+     padding: 1px;
+     top: 0%;
+     width: 100%;
+     color: black;
+     height: 100%;
+     image-resolution: 39 30;
+ }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="navbar">
+  <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Home</a> 
+  <a href="#"><i class="fa fa-fw fa-search"></i> Search</a> 
+  <a href="#"><i class="fa fa-fw fa-envelope"></i> Contact</a> 
+  <a href="#"><i class="fa fa-fw fa-user"></i> Login</a>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="row" style="background-color: yellow;width:70%;">
+  <div class="col-6 menu" style=" font-weight: bold;">
+    <label><h2>Jean de DIEU</h2>
+      <div class="col-7 content" style="width: 80%;background-color: red;margin-right:auto;text-align: left;">
+          <label>
+      <h1> Front end & Back</br> end Developer.</h1>  Im Rwandan, I live in Huye City, I like software </br> development with frontend and Backend </br> facilities as my  experiences in web production</label>
+   
+      </div>
+       <div class="col-8 content" style="width: 80%;background-color: red;margin-right:auto;text-align: left;color: white;">
+          <label>
+     High skilled in UI & UIX  Designing and System analyst. Innovative, Hardworker and Challenger in implementing software projects.</label>
+   
+      </div>
+      
+  </div>
+
+  <div class="col-3">
+    
+<h2>Responsive Form</h2>
+<p>Resize the browser window to see the effect. When the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other.</p>
+
+<div class="containerr">
+ 
+</div>
+  </div>
+
+  <div class="col-3 right">
+    <div class="aside">
+         <div class="dashed-line">
+            <svg>
+                <line x1="10" y1="10" x2="120px" y2="10" style="stroke: #ccf381;stroke-width:2
+                ;stroke-dasharray: 4 4 ;fill:none"/>
+                <line x1="10" y1="22" x2="120px" y2="22" style="stroke: #ccf381;stroke-width:2
+                ;stroke-dasharray: 4 4;fill:none"/>
+                <line x1="10" y1="32" x2="120px" y2="32" style="stroke: #ccf381;stroke-width:2
+                ;stroke-dasharray: 4 4 ;fill:none"/>
+                <line x1="10" y1="42" x2="120px" y2="42" style="stroke: #ccf381;stroke-width:2
+                ;stroke-dasharray: 4 4;fill:none"/>
+                <line x1="10" y1="52" x2="120px" y2="52" style="stroke: #ccf381;stroke-width:2
+                ;stroke-dasharray: 4 4 ;fill:none"/>
+                <line x1="10" y1="62" x2="120px" y2="62" style="stroke: #ccf381;stroke-width:2
+                ;stroke-dasharray: 4 4;fill:none"/>
+                <line x1="10" y1="72" x2="120px" y2="72" style="stroke: #ccf381;stroke-width:2
+                ;stroke-dasharray: 4 4;fill:none"/>
+                <line x1="10" y1="82" x2="120px" y2="82" style="stroke: #ccf381;stroke-width:2
+                ;stroke-dasharray: 4 4;fill:none"/>
+                <line x1="10" y1="92" x2="120px" y2="92" style="stroke: #ccf381;stroke-width:2
+                ;stroke-dasharray: 4 4;fill:none"/>
+            </svg>
+            
+        </div>
+
+   
+</div>
+          <script src="index.js"></script>
+        </div>
+</div>
+
+<div class="footer">
+  <p>Resize the browser window to see how the content respond to the resizing.</p>
+</div>
+
+
+
+
+
+<div class="row" style="background-color: yellow;width:30%;height:100%;position: absolute;left: 70%;top: 5%;">
+  <div class="col-6 menu" style=" font-weight: bold;">
+    <label><h2>Jean de DIEU</h2>
+      
+       
+      
+  </div>
+
+ 
+
+  <div class="col-3 right">
+    <div class="aside">
+                <nav role="navigation">
+  <div id="menuToggle">
+    <!--
+    A fake / hidden checkbox is used as click reciever,
+    so you can use the :checked selector on it.
+    -->
+    <input type="checkbox" />
+     
+    <!--
+    Some spans to act as a hamburger.
+     
+    They are acting like a real hamburger,
+    not that McDonalds stuff.
+    -->
+    <span></span>
+    <span></span>
+    <span></span>
+     
+    <!--
+    Too bad the menu has to be inside of the button
+    but hey, it's pure CSS magic.
+    -->
+    <ul id="menu">
+      <a href="#"><li>Home</li></a>
+      <a href="#"><li>About</li></a>
+      <a href="#"><li>Contact</li></a>
+      <a href="#"><li>Blogs</li></a>
+      <a href="#"><li>Sign UP</li></a>
+      <a href="#"><li>Viisit me on</li></a>
+    </ul>
+  </div>
+</nav>
+</div>
+          <script src="index.js"></script>
+        </div>
+</div>
+
+
+
+
+<div class="row" style="background-color: yellow;width:20%;height:100%;position: absolute;left: 70%;top: 5%;">
+  <div class="col-6 menu" style=" font-weight: bold;">
+    <label><h2>Jean de DIEU</h2>
+      
+       
+      
+  </div>
+
+ 
+
+  <div class="col-3 right">
+    <div class="aside">
+                <nav role="navigation">
+  <div id="menuToggle">
+    <!--
+    A fake / hidden checkbox is used as click reciever,
+    so you can use the :checked selector on it.
+    -->
+    <input type="checkbox" />
+     
+    <!--
+    Some spans to act as a hamburger.
+     
+    They are acting like a real hamburger,
+    not that McDonalds stuff.
+    -->
+    <span></span>
+    <span></span>
+    <span></span>
+     
+    <!--
+    Too bad the menu has to be inside of the button
+    but hey, it's pure CSS magic.
+    -->
+    <ul id="menu">
+      <a href="#"><li>Home</li></a>
+      <a href="#"><li>About</li></a>
+      <a href="#"><li>Contact</li></a>
+      <a href="#"><li>Blogs</li></a>
+      <a href="#"><li>Sign UP</li></a>
+      <a href="#"><li>Viisit me on</li></a>
+    </ul>
+  </div>
+</nav>
+</div>
+          <script src="index.js"></script>
+        </div>
+</div>
+
+
+
+
+
+
+<div class="row" style="background-color:black;width:20%;height:44%;position: absolute;left: 60%;top: 30%;">
+       <div class="line">
+</div>
+
+</div>
+
+<div class="row" style="background-color:black;width:20%;height:46%;position: absolute;left: 58%;top: 24%;">
+<div class="imagee">
+</div> 
+
+</div>
+
+
+
+</div>
+</body>
+</html>

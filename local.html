@@ -1,0 +1,97 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+  body {
+  padding:50px;
+  background: #02AAB0;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #02AAB0, #00CDAC);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #02AAB0, #00CDAC);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.close {
+  display: none;
+  cursor: pointer;
+}
+
+.list {
+  padding: 0;
+}
+
+.list li:hover .close {
+  display: inline-block;
+  padding-left: 10px;
+}
+
+.list li:focus {
+  outline: none;
+}
+
+.list li {
+  list-style: none;
+}
+    </style>
+</head>
+<body>
+    <input class='input' type='text'>
+    <button class='add-item'> add item</button>
+    <button class="update">  update </button>
+    <ul class='list'>
+    
+    </ul>
+    <p> Local storage is used to get the html from the users input. The same html is then used to set the local storage so it is saved into the browser. Each list item can be edited, press the update to store the info. They can also be removed by hovering over
+      the list item and pressing the x.</p>
+  </body>
+<script>$(document).ready(function() {
+    var $button = $('.add-item');
+    var $input = $('.input');
+    var $list = $('.list');
+    // get items from local storage
+    if (localStorage.getItem('user-input')) {
+      // select where the storage will be
+      $list.html(localStorage.getItem('user-input'));
+    }
+    // add item 
+    $button.on('click', function() {
+  
+      $list.append('<li>' + $input.val() + '<span class ="close"> x</span></li>');
+  
+      // set to html inside the list
+      localStorage.setItem('user-input', $list.html());
+  
+      $input.val('');
+  
+    });
+  
+    // edit list item
+    $('.list').click('li', function() {
+  
+      $('.list li').attr('contenteditable', 'true');
+  
+    });
+  
+    // update list
+    $('.update').on('click', function() {
+      // set to html inside the list
+      console.log('update');
+      localStorage.setItem('user-input', $list.html());
+    });
+  
+    // remove item
+    $('.list').on('click', '.close', function() {
+      $(this).parent().remove();
+      // save changes to local storage
+      localStorage.setItem('user-input', $list.html());
+    });
+    // clear the storage memory completely
+   localStorage.clear();
+  });
+</script>
+</html>
