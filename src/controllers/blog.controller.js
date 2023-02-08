@@ -1,82 +1,94 @@
-// import cloudinary from '../helpers/imageUpload.js';
-// import blogModel from '../models/Blogs.model.js';
+import Blog from "../models/Blogs.model.js";
 
-// const getAllBlogs = async (req, res) => {
-//   const blogs = await blogModel.find();
-//   res.json(blogs);
-// };
+// import blogImage from "../helpers/imageUpload.js";
 
-// const createBlogWithImage = async (req, res) => {
-//   const blog = new blogModel(req.body);
-//   await blog.save();
-//   try {
-//     const result = await cloudinary.uploader.upload(req.file.path, {
-//       folder: 'portfolio/blogImages',
-//       public_id: `${blog.title}_image`,
-//     });
-//     blog.image = result.url;
-//     await blog.save();
-//     res.json(blog);
-//   } catch (error) {
-//     res.status(500).json({
-//       success: false,
-//       message: 'Server Error: Could not upload image',
-//     });
-//     console.log('Error while uploading image: ', error.message);
-//   }
-// };
 
-// const getBlogId = async (req, res) => {
-//   try {
-//     const blog = await blogModel.findOne({ _id: req.params.id });
-//     if (!blog) {
-//       res.status(404).json({ error: "Blog doesn't exist" });
-//       return;
-//     }
-//     res.send(blog);
-//   } catch {
-//     res.status(500).json({ error: 'Internal server error' });
-//   }
-// };
+import cloudinary  from 'cloudinary';
+import   dotenv  from "dotenv"
 
-// const updateBlog = async (req, res) => {
-//   try {
-//     const blog = await blogModel.findOne({ _id: req.params.id });
+dotenv.config()
+// import uploader from '../config/cloudinary';
+cloudinary.v2;
 
-//     if (req.body.title) {
-//       blog.title = req.body.title;
-//     }
-//     if (req.body.content) {
-//       blog.content = req.body.content;
-//     }
-//     if (req.file) {
-//       blog.image = req.file.path;
-//       const result = await cloudinary.uploader.upload(req.file.path, {
-//         folder: 'portfolio/blogImages',
-//         public_id: `${blog.title}_image`,
-//       });
-//       blog.image = result.url;
-//     }
-//     await blog.save();
-//     console.log(blog);
-//     res.send(blog);
-//   } catch (err) {
-//     res.status(404);
-//     res.json({ error: "Blog doesn't exist" });
-//   }
-// };
+cloudinary.config({
+        cloud_name:"dtxq2qcox",
+        api_key: "172566471358293",
+        api_secret: "qF01khiT0k3xKyn8ixefLfAlbHE",
+      });
 
-// const deleteBlog = async (req, res) => {
-//   try {
-//     const result = await blogModel.deleteOne({ _id: req.params.id });
-//     if (result.deletedCount === 0) {
-//       res.status(404).json({ error: "Blog doesn't exist!" });
-//       return;
-//     }
-//     res.status(204).json({ message: 'Blog deleted successfully' });
-//   } catch {
-//     res.status(500).json({ error: 'Internal server error' });
-//   }
-// };
 
-// export { getAllBlogs, updateBlog, getBlogId, deleteBlog, createBlogWithImage };
+export const createBlog = async function(req, res){
+    console.log("AASASASASA", req.body)
+    try {
+        // if(req.files) {
+            
+            const image = await cloudinary.uploader.upload(req.file.path);
+            // }
+               const blog= await new Blog({
+                    title:req.body.title,
+                    body:req.body.body,
+                    image: image.secure_url,
+                })
+             
+            blog.save()
+            .then(result=>{
+                console.log(result);
+                res.json(result)
+            })
+            .catch(error=>console.log(error))
+
+    
+    }
+    catch (err) {
+        res.status(500).json(err)
+        console.log(err)
+    }
+
+};
+export const findblog = async(req,res) =>{
+    const blogs = await Blog.find();
+    res.send(blogs);
+  }
+  export const findblogbyid = async(req,res) =>{
+    const blogs = await Blog.findById({_id: req.params.id});
+    res.send(blogs);
+  }
+
+  export const deleteblog = async (req, res) => {
+    try {
+        const  blogs = await Blog.deleteOne({ _id: req.params.id });
+      res.status(207).send({ok:'delete success'});
+    } catch {
+      res.status(406);
+      res.send({ error: "blog doesn't exist!" });
+    }
+  }
+
+  export const addComment = async (req, res) => {
+    try {
+      const blog = await Blog.findOne({ _id: req.params.id });
+      if (!blog) {
+        res
+          .status(404)
+          .json({ status: 404, success: false, message: "Blog doesn't exist" });
+        return;
+      } else {
+        blog.comments = [
+          ...blog.comments,
+          { comment: req.body.comment, user: req.user, blog: blog },
+        ];
+        blog.save();
+        res.status(201).json({
+          success: true,
+          message: `Comment added`,
+        });
+      }
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: `Server Error: Error when adding comment ${error.message}`,
+      });
+      console.log(`Error while adding comment ${error.message}`);
+    }
+  };
+  

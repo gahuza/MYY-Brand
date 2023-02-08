@@ -1,106 +1,217 @@
-// import { validationResult } from "express-validator";
-import { Users } from "../models/userModel.js";
+import jwt from 'jsonwebtoken';
+import userModel from '../Models/userModel.js';
+import   dotenv  from "dotenv"
+
+dotenv.config()
+
+
+const signInToken = (id) => {};
+class userController {
+  static async findAll(req, res) {
+    try {
+      const users = await userModel.find();
+
+      res.status(200).json({
+        status: 'success',
+        data: {
+          users,
+        },
+      });
+    } catch (error) {
+      res.status(404).json({
+        status: 'error',
+        error: 'Not user found',
+      });
+    }
+  }
+  static async postOne(req, res) {
+   
+    try {
+      const { firstName, lastName, email, password, role } = req.body;
+      const user = await userModel.findOne({ email });
+  
+      if (user) {
+        return res.status(409).json({
+          status: 'fail',
+          message: 'Email in use',
+        });
+      }
+  
+
+      const newUser = await userModel.create(req.body);
+      const token = await jwt.sign(
+        { id: newUser._id },
+        process.env.TOKEN_SECRET,
+        {
+          expiresIn: process.env.JWT_EXPERISIN,
+        }
+      );
+
+      res.status(200).json({
+        status: 'success',
+        users: 'Signup success and login',
+        token,
+        data: {
+          newUser,
+        },
+      });
+    } catch (error) {
+      res.status(404).json({
+        status: 'error',
+        error: error,
+      });
+    }
+  }
+  static async post(req, res) {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'Email and password are required',
+      });
+    }
+    const user = await userModel.findOne({ email });
+    if (!user || !(await user.correctPassword(password, user.password))) {
+      return res.status(401).json({
+        status: 'fail',
+        message: 'Incorrect email or password',
+      });
+    }
+
+   
+    try {
+      const token = await jwt.sign({ id: user._id }, process.env.TOKEN_SECRET, {
+        expiresIn: process.env.JWT_EXPERISIN,
+      });
+      res.status(200).json({
+        status: 'success',
+        users: 'SignIn success and login',
+        LoggedInAs: {
+          user,
+        },
+        token,
+      });
+    } catch (error) {
+      res.status(404).json({
+        status: 'error',
+        error: error,
+      });
+    }
+  }
+  static async UpdateOne(req, res) {
+    const { password } = req.body;
+
+    if (password) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'this is not the route for updating password is for others',
+      });
+    }
+    const updateUser = await userModel.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+    try {
+      res.status(200).json({
+        status: 'success',
+        message: 'Update success done ',
+      });
+    } catch (error) {
+      res.status(404).json({
+        status: 'error',
+        error: error,
+      });
+    }
+  }
+  static async deleteOne(req, res) {
+    const user = await userModel.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({
+        status: 'fail',
+        message: 'user not found',
+      });
+    }
+    try {
+      await userModel.findOneAndDelete({ _id: req.params.id });
+      res.status(200).json({
+        status: 'success',
+        users: 'Delete user successfully done',
+      });
+    } catch (error) {
+      res.status(204).json({
+        status: 'error',
+        error: 'Delete failed',
+      });
+    }
+  }
+}
+export const getAllUsers = async(req,res)=>{
+  const users = await userModel.find();
+  res.send(users);
+}
+export const getAllUsersById = async(req,res) =>{
+  const userss = await userModel.findById({_id: req.params.id});
+  res.send(userss);
+}
+export const deleteSingleUserById = async (req, res) => {
+  try {
+      await userModel.deleteOne({ _id: req.params.id });
+    res.status(207).send({ok:'delete success'});
+  } catch {
+    res.status(406);
+    res.send({ error: "user doesn't exist!" });
+  }
+}
+
+
+export default userController;
+
+// import { Users } from "../models/userModel.js";
 // import  Jwt  from "jsonwebtoken";
-// const signInToken = (id) => {};
+// export const register = async(req,res) =>{
+//  const { username, email, password } =req.body;
+//  try {
+//     let user= await Users.findOne({ email });
 
+//     if (user) throw {code:11000};
 
-export const register = async(req,res) => {
-     const { email, name, password, repassword } = req.body;
-    try {
-        let user = await Users.findOne({ email });
-        if(user) throw {code:11000};
-         user = new Users({email, name, password, repassword})
-        await user.save();
-        //user token
-        return res.status(201).json({ok:'registered'});
-    } catch (error) {
-        console.log(error); 
-        if (error.code === 11000){
-     return res.status(400).json({error:' Already exist user'});
-        }
-    }
+//     user = new Users({username, email, password});
+//     await user.save();
+//     //jwt token
+//     return res.status(201).json({ok:'registered'})
 
-    }
+//  } catch (error) {
+//     console.log(error);
+//     if(error.code ===11000){
+//         return res.status(400).json({error:'Email in use'}) ;
+//     }
+//  }
+// }
+// export const login = async(req,res) =>{
+// try {
+//     const { email, password } =req.body;
+//     let user= await Users.findOne({ email });
+//     if(!user)
+//     return res.status(403).json({ok:'user not exist'})
 
-export const login = async(req,res) => {
-    const { email,password } = req.body;
-    try {
-        let user = await Users.findOne({ email });
-        if (!user)  return res.status(403).json({error:' Noo exist user'});
+//     const requestpassword = await user.comparePassword(password);
+//     if(!requestpassword){
+//         return res.status(403).json({ok:'incorrect password'})
+//     }
+//     //jwt token
+//     res.json({ok:'login'});
+// } catch (error) {
+//     console.log(error);
+// }
 
-        const requestuser = await user.comparePassword( password );
-        if( !requestuser ){
-            return res.status(403).json({error:' password incorrect'});
-        }
-        res.json({ ok: "well login" });
-    } catch (error) {
-        console.log(error); 
-        return res.status(500).json({error:' error occured'});
-    }
-    
-
-    }
-
-
-  export  const findUsers = async(req,res) =>{
-        const useries = await Users.find();
-        res.send(useries);
-      }
-    
-
-
-      class userController {
-    //   static async deleteOne(req, res) {
-    //     const user = await Users.findById(req.params.id);
-    //     if (!user) {
-    //       return res.status(404).json({
-    //         status: 'fail',
-    //         message: 'user not found',
-    //       });
-    //     }
-    //     try {
-    //       await Users.findOneAndDelete({ _id: req.params.id });
-    //       res.status(200).json({
-    //         status: 'success',
-    //         users: 'Delete user successfully done',
-    //       });
-    //     } catch (error) {
-    //       res.status(204).json({
-    //         status: 'error',
-    //         error: 'Delete failed',
-    //       });
-    //     }
-    //   }
-
-    }
-
-    export const updateuser= async (req, res) => {
-        try {
-          const  useries = await Users.findOne({ _id: req.params.id });
-      
-          if (req.body. email) {
-            useries.email = req.body.email;
-          }
-      
-          if (req.body. name) {
-            useries.name = req.body. name;
-          }
-      
-          await  useries.save();
-          res.send( useries);
-        } catch {
-          res.status(404);
-          res.send({ error: "Post doesn't exist!" });
-        }
-      };
-
-      export const deleteuser = async (req, res) => {
-        try {
-            const  useries = await Users.deleteOne({ _id: req.params.id });
-          res.status(204).send();
-        } catch {
-          res.status(404);
-          res.send({ error: "user doesn't exist!" });
-        }
-      }
-    // export default userController;
+  
+// }
+// export const finduser = async(req,res) =>{
+//     const users = await Users.find();
+//     res.send(users);
+//   }
