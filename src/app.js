@@ -7,6 +7,7 @@ import apiRouter from './routes/api.js';
  import blogRouter from './routes/blog.routes.js';
 // import  autRouter  from './routes/userRoute.js';
 import route from './routes/userRoute.js';
+import  docrouter  from "./documentation/swagger.doc.js";
 
 const app = express();
 app.use(bodyParser.json());
@@ -14,10 +15,12 @@ app.use(morgan("combined"));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
+app.use("/api/docs", docrouter);
  app.use("/api", apiRouter)
  app.use("/api",  blogRouter)
 //   app.use("/api", commentRouter)
  app.use('/api', route);
+
 
 
 // app.use((req, res, next) => {
