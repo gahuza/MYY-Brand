@@ -1,8 +1,7 @@
-import  mongoose from "mongoose";
 
-const schema = mongoose.Schema;
+import mongoose from 'mongoose';
 
-const commentSchema = new schema(
+const schema = mongoose.Schema(
   {
     comment: {
       type: String,
@@ -17,9 +16,34 @@ const commentSchema = new schema(
       ref: 'Blog',
     },
   },
-  { timestamps: true 
-});
+  {
+    timestamps: true,
+  },
+);
 
-const comments = mongoose.model("comments", commentSchema);
+export { schema as commentSchema };
+// import  mongoose from "mongoose";
 
-export default comments;
+// const schema = mongoose.Schema;
+
+// const commentSchema = new schema(
+//   {
+//     comment: {
+//       type: String,
+//       required: true,
+//     },
+//     user: {
+//       type: mongoose.Schema.Types.ObjectId,
+//       ref: 'User',
+//     },
+//     blog: {
+//       type: mongoose.Schema.Types.ObjectId,
+//       ref: 'Blog',
+//     },
+//   },
+//   { timestamps: true 
+// });
+
+// const comments = mongoose.model("comments", commentSchema);
+
+// export default comments;

@@ -11,7 +11,7 @@ const PORT = process.env.PORT;
 const server = http.createServer(app)
 
 
-const startServer = async () =>{
+export const startServer = async () =>{
     await mongoConnect();
 
     server.listen(PORT, () =>{

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-
+import { commentSchema } from './commentmod.js';
+import { likeSchema } from './likesModel.js';
 const schema = mongoose.Schema(
   {
     title: {
@@ -14,6 +15,9 @@ const schema = mongoose.Schema(
       type: String,
       required: false,
     },
+    comments: [commentSchema],
+    likes: [likeSchema]
+
   },
   {
     timestamps: true,

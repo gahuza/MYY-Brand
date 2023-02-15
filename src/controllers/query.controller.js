@@ -1,6 +1,6 @@
 import  Query from "../models/Queries.model.js";
 
-const httpCreateMovie = async (req, res) => {
+const httpCreateQuery = async (req, res) => {
 
   try {
     const query = new Query(req.body);
@@ -21,7 +21,7 @@ const httpCreateMovie = async (req, res) => {
 };
 const findQueri = async(req,res) =>{
   const queries = await Query.find();
-  res.send(queries);
+  res.status(203).send(queries);
 }
 
 export const deletequery = async (req, res) => {
@@ -34,4 +34,4 @@ export const deletequery = async (req, res) => {
   }
 }
 
-export { httpCreateMovie,findQueri };
+export { httpCreateQuery,findQueri };

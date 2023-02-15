@@ -1,7 +1,7 @@
 import  express  from "express";
 import multer  from "multer"
 import path  from "path"
-import { createBlog , findblog , deleteblog ,findblogbyid, addComment  }  from "../controllers/blog.controller.js";
+import { createBlog ,getAllBlogs, deleteBlog ,getBlogById , addComment ,getAllComments ,updateSingleBlog ,like ,likesCounting}  from "../controllers/blog.controller.js";
 import { auth } from "../middleware/auth.js";
 import { commentsSchema } from "../middleware/validation.js";
 import validate from "../middleware/validation.middleware.js";
@@ -24,16 +24,19 @@ var upload = multer({
 
 blogRouter.post('/blogs',upload.single("image"),createBlog);
 
- blogRouter.get('/blogs',findblog)
+ blogRouter.get('/blogs',getAllBlogs)
  blogRouter.get('/signIn',getAllUsers)
- blogRouter.get('/blogs/:id',findblogbyid)
+ blogRouter.get('/blogs/:id',getBlogById )
  blogRouter.get('/signIn/:id',getAllUsersById)
-blogRouter.delete('/blogs/:id',deleteblog)
+blogRouter.delete('/blogs/:id',deleteBlog)
 blogRouter.delete('/signIn/:id',deleteSingleUserById)
+blogRouter.patch('/blogs/:id',upload.single("image"), updateSingleBlog);
+//blog likes
+blogRouter.post('/blogs/:id/likes',auth, like);
+blogRouter.get('/blogs/:id/likes', likesCounting);
 // blogRouter.patch('/blogs/:id',updateBlog)
-blogRouter.post(
-  '/blogs/:id/comments',
-  [auth, validate(commentsSchema)],
-  addComment,
-);
+blogRouter.post('/blogs/:id/comments', [auth, validate(commentsSchema)], addComment);
+blogRouter.get('/comments/:id',getAllComments);
+
+
  export default blogRouter;

@@ -129,7 +129,7 @@ class userController {
     }
   }
   static async deleteOne(req, res) {
-    const user = await userModel.findById(req.params.id);
+   await userModel.findById(req.params.id);
     if (!user) {
       return res.status(404).json({
         status: 'fail',
@@ -156,7 +156,7 @@ export const getAllUsers = async(req,res)=>{
 }
 export const getAllUsersById = async(req,res) =>{
   const userss = await userModel.findById({_id: req.params.id});
-  res.send(userss);
+  res.status(500).send(userss);
 }
 export const deleteSingleUserById = async (req, res) => {
   try {
