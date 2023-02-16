@@ -47,7 +47,7 @@ class userController {
         }
       );
 
-      res.status(200).json({
+      res.status(404).json({
         status: 'success',
         users: 'Signup success and login',
         token,
@@ -56,7 +56,7 @@ class userController {
         },
       });
     } catch (error) {
-      res.status(404).json({
+      res.status(200).json({
         status: 'error',
         error: error,
       });

@@ -17,14 +17,14 @@ security: [
   }
 ],
 tags: [
-      {name: 'Users', description: 'Users'},
+      {name: 'userModel', description: 'userModel'},
       {name: 'Blog', description: 'Blogs'},
-      {name: 'Message', description: 'Messages'},
+      {name: 'Query', description: 'Query'},
     ],
   paths: {
-    '/api/users/register': {
+    '/api/signup': {
       post: {
-        tags: ['Users'],
+        tags: ['userModel'],
         description: 'User register',
         security: [],
         parameters: [],
@@ -32,12 +32,15 @@ tags: [
           content: {
             'application/json': {
               schema: {
-                $ref: '#/components/schemas/User',
+                $ref: '#/components/schemas/userModel',
               },
               example: {
-                username: 'Ntwali Joseph',
-                email: 'admin@gmail.com',
-                password: '123456',
+                firstname: 'Jadosokero',
+                lastname: 'Joseph',
+                password: 'joseph',
+                email: 'admin@gmail.com'
+               
+                
               },
             },
           },
@@ -56,7 +59,7 @@ tags: [
         },
       },
     },
-    '/api/users/login': {
+    '/api/signin': {
         post: {
         tags: ['Users'],
         description: 'User login',
@@ -89,7 +92,29 @@ tags: [
         },
         }
     },
-    '/blogs/': {
+    '/api/signIn/{id}': {
+      get: {
+        security: [],
+      tags: ['userModel'],
+      description: 'Get One Blog user by id',
+      parameters: [
+        {
+           "in": "path",
+         "name": "id",
+          required: true,
+        }
+      ],
+      responses: {
+        200: {
+          description: 'successfully',
+        },
+        500: {
+            description: 'Internal Server Error'
+        }
+      },
+      }
+  },
+    '/api/blogs/': {
         get: {
         tags: ['Blog'],
         description: 'Get All Blog Articles',
@@ -105,7 +130,9 @@ tags: [
         },
       }
     },
-    '/api/blog/{id}': {
+
+    
+    '/api/blogs/{id}': {
       get: {
         security: [],
       tags: ['Blog'],
@@ -127,7 +154,7 @@ tags: [
       },
       }
   },
-  '/api/blog/add':{
+  '/api/blogs':{
     post:{
       tags:['Blog'],
       description:'Create new blog article',
@@ -178,7 +205,7 @@ tags: [
       },
     }
   },
-  '/api/blog/update/{id}':{
+  '/api/blogs/{id}':{
     patch:{
       tags:['Blog'],
       description:'Update blog article',
@@ -219,7 +246,7 @@ tags: [
       },
     }
   },
-  '/api/blog/{id}':{
+  '/api/blogs/{id}':{
     delete:{
       tags:['Blog'],
       description:'Delete blog article',
@@ -256,7 +283,7 @@ tags: [
       },
     }
   },
-  '/api/blog/comment/':{
+  '/api/blogs/comments/':{
     post:{
       tags:['Blog'],
       description:'Comment on article blog article',
@@ -291,7 +318,7 @@ tags: [
       },
     }
   },
-  '/api/message/send/':{
+  '/api/query/send/':{
     post:{
       tags:['Message'],
       security:[],
@@ -322,9 +349,9 @@ tags: [
       },
     }
   },
-  '/api/message/':{
+  '/api/query/get':{
     get:{
-      tags:['Message'],
+      tags:['Query'],
       description:'Getting all messages',
       parameters: [],
       responses: {
@@ -343,14 +370,18 @@ tags: [
   },
   components: {
     schemas: {
-      User: {
+      userModel: {
         type: 'object',
         properties: {
           id: {
             type: 'string',
             description: 'The auto-generated id of the user',
           },
-          username: {
+          firstName: {
+            type: 'string',
+            description: "User's names",
+          },
+          lastName: {
             type: 'string',
             description: "User's names",
           },
@@ -368,6 +399,8 @@ tags: [
           },
         },
       },
+
+
       Blog: {
         type: 'object',
         properties: {

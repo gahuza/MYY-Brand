@@ -34,7 +34,7 @@ export const createBlog = async function(req, res){
             .then(result=>{
                 console.log(result);
                 res.json(result)
-                res.status(202).send({ok:'add  successfully'});
+                res.status(200).send({ok:'add  successfully'});
             })
             .catch(error=>console.log(error))
 
@@ -46,14 +46,52 @@ export const createBlog = async function(req, res){
     }
 
 };
-export const getAllBlogs = async(req,res) =>{
+// export const getAllBlogs = async(req,res) =>{
+//     const blogs = await Blog.find();
+//     res.send(blogs);
+//   }
+
+
+  export const getAllBlogs = async (req, res) => {
+    try {
     const blogs = await Blog.find();
-    res.send(blogs);
-  }
-  export const getBlogById = async(req,res) =>{
+    return res.status(200).json({
+    status: "success",
+    number: blogs.length,
+    blogs,
+    });
+    } catch (error) {
+    return res.status(404).json({
+    status: "failed",
+    error: error.message,
+    });
+    }
+    };
+
+
+  // export const getBlogById = async(req,res) =>{
+  //   const blogs = await Blog.findById({_id: req.params.id});
+  //   res.send(blogs);
+  // }
+
+
+  export const getBlogById = async (req, res) => {
+    try {
     const blogs = await Blog.findById({_id: req.params.id});
-    res.send(blogs);
-  }
+    return res.status(200).json({
+    status: "success",
+    number: blogs.length,
+    blogs,
+    });
+    } catch (error) {
+    return res.status(404).json({
+    status: "failed",
+    error: error.message,
+    });
+    }
+    };
+
+
 
   export const deleteBlog = async (req, res) => {
     try {

@@ -12,7 +12,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: 'npm install'
+          name: "npm install"
           command: npm install
 
   test:
@@ -21,10 +21,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: 'npm install'
+          name: "npm install"
           command: npm install
       - run:
-          name: 'npm test'
+          name: "npm test"
           command: npm test
       - coveralls/upload
       - store_artifacts: # special step to save test results as as artifact
@@ -36,7 +36,7 @@ jobs:
           prefix: coverage
       - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test-results
-
+      
 workflows:
   build_and_test:
     jobs:
@@ -45,6 +45,3 @@ workflows:
           requires:
             - build
 
-notify:
-  webhooks:
-    - url: https://coveralls.io/webhook?repo_token=${{secrets.COVERALLS_TOKEN}}

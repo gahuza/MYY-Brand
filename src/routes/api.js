@@ -3,9 +3,9 @@ import { httpCreateQuery , findQueri, deletequery} from "../controllers/query.co
 
 const apiRouter= express.Router();
 
-apiRouter.get('/query',findQueri)
+apiRouter.get('/query/get',findQueri)
 
-apiRouter.post('/query',httpCreateQuery)
+apiRouter.post('/query/send',httpCreateQuery)
 
 apiRouter.delete('/query/:id',deletequery)
  export default apiRouter;

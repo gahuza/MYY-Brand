@@ -13,12 +13,6 @@ const userModel = new mongoose.Schema({
     type: String,
     required: [true, 'lastName is required'],
   },
-  password: {
-    type: String,
-    required: [true, 'Password is required'],
-    minlength: [6, 'Length should be 6'],
-    maxlength: [12, 'length should be lower than 12 characters'],
-  },
   email: {
     type: String,
     required: [true, 'Email is required'],
@@ -26,6 +20,18 @@ const userModel = new mongoose.Schema({
     lowercase: true,
     validator: [validator.isEmail, 'Please input valid email'],
   },
+  password: {
+    type: String,
+    required: [true, 'Password is required'],
+    minlength: [6, 'Length should be 6'],
+    maxlength: [12, 'length should be lower than 12 characters'],
+  },
+  role: {
+    type: String,
+    default: 'local',
+    enum: ['admin', 'local'],
+  },
+ 
   profileImage: {
     type: String,
     default:
@@ -43,11 +49,7 @@ const userModel = new mongoose.Schema({
   //   type: String,
   //   default: 'none',
   // },
-  role: {
-    type: String,
-    default: 'local',
-    enum: ['admin', 'local'],
-  },
+ 
 
   // desc: {
   //   type: String,

@@ -35,7 +35,7 @@ blogRouter.patch('/blogs/:id',upload.single("image"), updateSingleBlog);
 blogRouter.post('/blogs/:id/likes',auth, like);
 blogRouter.get('/blogs/:id/likes', likesCounting);
 // blogRouter.patch('/blogs/:id',updateBlog)
-blogRouter.post('/blogs/:id/comments', [auth, validate(commentsSchema)], addComment);
+blogRouter.post('/blogs/comments/:id', [auth, validate(commentsSchema)], addComment);
 blogRouter.get('/comments/:id',getAllComments);
 
 
