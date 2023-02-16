@@ -45,3 +45,6 @@ workflows:
           requires:
             - build
 
+notify:
+  webhooks:
+    - url: tVfJYFAJaZE1VSAtvNGQJLr2uJc6xuLFA}
