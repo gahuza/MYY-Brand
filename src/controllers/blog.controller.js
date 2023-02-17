@@ -9,11 +9,13 @@ import   dotenv  from "dotenv"
 dotenv.config()
 // import uploader from '../config/cloudinary';
 cloudinary.v2;
-
+// const CLOUD_NAME = ;
+// const API_KEY = ;
+// const API_SECRET= ;
 cloudinary.config({
-        cloud_name:"dtxq2qcox",
-        api_key: "172566471358293",
-        api_secret: "qF01khiT0k3xKyn8ixefLfAlbHE",
+        cloud_name:"process.env.CLOUD_NAME",
+        api_key: "process.env.API_KEY",
+        api_secret: "process.env.API_SECRET",
       });
 
 
