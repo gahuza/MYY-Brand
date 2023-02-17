@@ -6,15 +6,15 @@ import color from "colors";
 dotenv.config()
 
 const MONGO_URL = process.env.MONGO_URL
-
+mongoose.set('strictQuery', true);
 mongoose.connection.once("open", () =>{
     console.log("Database connected!!".blue.underline);
 });
 
 
-mongoose.connection.on("open", () =>{
-    console.log("error happen! ")
-});
+// mongoose.connection.on("open", () =>{
+//     console.log("error happen! ")
+// });
 
 const mongoConnect = async () =>{
     await mongoose.connect(MONGO_URL);

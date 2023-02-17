@@ -66,15 +66,17 @@ class userController {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.status(400).json({
-        status: 'fail',
+      return res.status(404).json({
+        status: '404',
+        success: false,
         message: 'Email and password are required',
       });
     }
     const user = await userModel.findOne({ email });
     if (!user || !(await user.correctPassword(password, user.password))) {
       return res.status(401).json({
-        status: 'fail',
+        status: '401',
+        success: false,
         message: 'Incorrect email or password',
       });
     }
@@ -93,7 +95,7 @@ class userController {
         token,
       });
     } catch (error) {
-      res.status(404).json({
+      res.status(500).json({
         status: 'error',
         error: error,
       });

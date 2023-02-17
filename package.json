@@ -5,7 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && nodemon ./build/src/server.js",
+    "start": "npm run build && node ./build/src/server.js",
     "start:dev": "nodemon --exec babel-node ./src/server.js",
     "clean": "rm -rf build && mkdir build",
     "build-babel": "babel -d ./build/src/ ./src/ -s",
@@ -25,7 +25,6 @@
   },
   "homepage": "https://github.com/Abdulkeza/movie-api#readme",
   "dependencies": {
-    "@babel/cli": "^7.20.7",
     "@hapi/joi": "^17.1.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.1",
@@ -46,9 +45,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
-    "@babel/node": "^7.20.7",
     "@babel/plugin-transform-runtime": "^7.19.6",
-    "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.20.2",
     "@babel/runtime": "^7.20.13",
     "babel-jest": "^29.4.2",

@@ -34,7 +34,7 @@ export const createBlog = async function(req, res){
             .then(result=>{
                 console.log(result);
                 res.json(result)
-                res.status(200).send({ok:'add  successfully'});
+                res.status(201).send({ok:'add  successfully'});
             })
             .catch(error=>console.log(error))
 
@@ -52,21 +52,26 @@ export const createBlog = async function(req, res){
 //   }
 
 
-  export const getAllBlogs = async (req, res) => {
-    try {
-    const blogs = await Blog.find();
-    return res.status(200).json({
-    status: "success",
-    number: blogs.length,
-    blogs,
-    });
-    } catch (error) {
-    return res.status(404).json({
-    status: "failed",
-    error: error.message,
-    });
-    }
+  // export const getAllBlogs = async (req, res) => {
+  //   try {
+  //   const blogs = await Blog.find();
+  //   return res.status(200).json({
+  //   status: "success",
+  //   number: blogs.length,
+  //   blogs,
+  //   });
+  //   } catch (error) {
+  //   return res.status(500).json({
+  //   status: "failed",
+  //   error: error.message,
+  //   });
+  //   }
+  //   };
+    export const getAllBlogs = async (req, res) => {
+      const blogs = await Blog.find();
+      res.status(200).json({ status: 200, success: true, data: blogs });
     };
+    
 
 
   // export const getBlogById = async(req,res) =>{
@@ -122,8 +127,8 @@ export const createBlog = async function(req, res){
         blog.image = result.url;
       }
       await blog.save();
-      res.status(300).json({
-        status: 300,
+      res.status(201).json({
+        status: 201,
         success: true,
         message: 'Blog updated',
         data: blog,
@@ -178,7 +183,7 @@ export const createBlog = async function(req, res){
         return;
       }
   
-      res.send(blog.comments);
+      res.status(200).send(blog.comments);
     } catch {
       res.status(500).json({ error: 'Internal server error' });
     }
@@ -244,3 +249,5 @@ export const createBlog = async function(req, res){
     }
   };
   
+
+ 
