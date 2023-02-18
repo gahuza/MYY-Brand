@@ -186,7 +186,7 @@ export const createBlog = async function(req, res){
       }
   
       res.status(200).send(blog.comments);
-    } catch {
+    } catch (error){
       res.status(500).json({ error: 'Internal server error' });
     }
   };
