@@ -19,9 +19,9 @@ export const httpCreateQuery = async (req, res) => {
     });
   }
 };
-const findQueri = async(req,res) =>{
+export const findQueri = async(req,res) =>{
   const queries = await Query.find();
-  res.status(203).send(queries);
+  res.status(200).send(queries);
 }
 
 export const deletequery = async (req, res) => {
@@ -34,4 +34,3 @@ export const deletequery = async (req, res) => {
   }
 }
 
-export { findQueri };
