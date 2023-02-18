@@ -1,6 +1,6 @@
 import  Query from "../models/Queries.model.js";
 
-const httpCreateQuery = async (req, res) => {
+export const httpCreateQuery = async (req, res) => {
 
   try {
     const query = new Query(req.body);
@@ -34,4 +34,4 @@ export const deletequery = async (req, res) => {
   }
 }
 
-export { httpCreateQuery,findQueri };
+export { findQueri };

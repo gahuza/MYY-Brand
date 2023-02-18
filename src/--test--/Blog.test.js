@@ -7,10 +7,33 @@ import app from "../app.js";
 import {expect, jest, test} from '@jest/globals';
 import  response  from "supertest";
 dotenv.config({ path: "../.env" });
-// import Query from "../models/Queries.model.js";
+import Query from "../models/Queries.model.js";
 import Blog from "../models/Blogs.model.js";
+// import { describe } from "@hapi/joi/lib/base.js";
+import userModel from '../Models/userModel.js';
+import { getAllUsers, getAllUsersById ,deleteSingleUserById ,UpdateOne} from "../controllers/userController.js";
+import { httpCreateQuery } from "../controllers/query.controller.js";
+// import UpdateOne from "../controllers/userController";
+
+
+dotenv.config()
+
+
+const signInToken = (id) => {};
 
 /* Connecting to the database before each test. */
+
+
+
+
+
+
+
+
+
+
+
+
 jest.setTimeout(20000);
 beforeEach(async () => {
   try {
@@ -41,6 +64,136 @@ beforeEach(async () => {
 afterEach(async () => {
   await mongoose.connection.close();
 });
+
+
+describe('getAllUsers', () => {
+  it('should return all users', async () => {
+    const mockUsers = [{ name: 'User 1' }, { name: 'User 2' }];
+    userModel.find = jest.fn().mockResolvedValue(mockUsers);
+    const req = {};
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      send: jest.fn(),
+    };
+    await getAllUsers(req, res);
+    expect(userModel.find).toHaveBeenCalledTimes(1);
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.send).toHaveBeenCalledWith(mockUsers);
+  });
+
+  it('should return a user with the specified ID', async () => {
+    const mockUser = { name: 'User 1', _id: '123' };
+    userModel.findById = jest.fn().mockResolvedValue(mockUser);
+    const req = { params: { id: '123' } };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      send: jest.fn(),
+    };
+    await getAllUsersById(req, res);
+    expect(userModel.findById).toHaveBeenCalledWith({ _id: '123' });
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.send).toHaveBeenCalledWith(mockUser);
+  });
+
+  it('should delete the user with the specified ID', async () => {
+    userModel.deleteOne = jest.fn().mockResolvedValue({ deletedCount: 1 });
+    const req = { params: { id: '123' } };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      send: jest.fn(),
+    };
+    await deleteSingleUserById(req, res);
+    expect(userModel.deleteOne).toHaveBeenCalledWith({ _id: '123' });
+    expect(res.status).toHaveBeenCalledWith(207);
+    expect(res.send).toHaveBeenCalledWith({ ok: 'delete success' });
+  });
+
+});
+
+describe('UpdateOne', () => {
+  let req;
+  let res;
+
+  beforeEach(() => {
+    req = {
+      params: { id: '1' },
+      body: { name: 'John Doe' },
+    };
+    res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('should return a success message when update succeeds', async () => {
+    const mockUpdateUser = { name: 'John Doe', _id: '1' };
+    jest.spyOn(userModel, 'findByIdAndUpdate').mockResolvedValue(mockUpdateUser);
+
+    await UpdateOne(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith({
+      status: 'success',
+      message: 'Update success done ',
+    });
+  });
+
+
+});
+
+
+
+
+describe('api test Queries', () => {
+  let req, res;
+
+  beforeEach(() => {
+    req = { body: { name: 'Test User', email: 'test@example.com', message: 'Test message' } };
+    res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should create a new query', async () => {
+    const mockQuery = new Query(req.body);
+    jest.spyOn(Query.prototype, 'save').mockResolvedValueOnce(mockQuery);
+
+    await httpCreateQuery(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(201);
+    expect(res.json).toHaveBeenCalledWith({
+      success: true,
+      message: 'query create succefully',
+      Query: mockQuery,
+    });
+  });
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -208,7 +361,7 @@ it('get all blogs', async () => {
   
       // Send a POST request to the endpoint with a comment in the request body
       const res = await request(app)
-        .post('/blogs/abc123/comments')
+        .post('/blogs/63e8c634d7a3542707a55caa/comments')
         .send({ comment: 'This is a comment.' });
   
       // Assert that the response has a 201 status code
@@ -261,6 +414,22 @@ it('get all blogs', async () => {
   })
 
 
+  //comments
+  describe('GET /blogs/:id/comments', () => {
+    it("return a 400 status if '_id' is invalid", async () => {
+      const res = await request(app).get('/api/comments/63e373de2ffaef80bcc03c95');
+      expect(res.status).toEqual(404);
+      const message = res.body.message;
+      expect(message).toEqual("Blog doesn't exist");
+    });
+    it('return one blog', async () => {
+      const allBlogs = await request(app).get('/api/blogs');
+      const currentBlog = allBlogs.body.data[0];
+      const id = currentBlog._id;
+      const res = await request(app).get(`/api/comments/${id}`);
+      expect(res.status).toEqual(200);
+    });})
+
    //add or remove like
    describe('POST /blogs/:id/likes', () => {
     it('return a 500 status if user is not logged in', async () => {
@@ -301,14 +470,14 @@ it('get all blogs', async () => {
   describe('POST /like/:id', () => {
     let blog;
   
-    // beforeAll(async () => {
-    //   // create a sample blog to be used in the tests
-    //   blog = await Blog.create({
-    //     title: 'Test Blog',
-    //     content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    //     likes: [],
-    //   });
-    // });
+    beforeAll(async () => {
+      // create a sample blog to be used in the tests
+      blog = await Blog.create({
+        title: 'Test Blog',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        likes: [],
+      });
+    });
   
     // afterAll(async () => {
     //   // remove the sample blog after all tests are done
@@ -317,7 +486,7 @@ it('get all blogs', async () => {
   
     it('should like a blog if not already liked', async () => {
       const response = await request(app)
-        .post(`/like/${blog._id}`)
+        .post(`/like/${`63e8c634d7a3542707a55caa`}`)
         .send({})
         .expect(201);
   
@@ -330,7 +499,7 @@ it('get all blogs', async () => {
       await request(app).post(`/like/${blog._id}`).send({});
   
       const response = await request(app)
-        .post(`/like/${blog._id}`)
+        .post(`/like/${`63e8c634d7a3542707a55caa`}`)
         .send({})
         .expect(201);
   
@@ -372,28 +541,28 @@ it('get all blogs', async () => {
 
    //like counting
    describe('GET /likesCounting/:id', () => {
-    // let blog;
+    let blog;
   
-    // beforeAll(async () => {
-    //   // create a sample blog to be used in the tests
-    //   blog = await Blog.create({
-    //     title: 'Test Blog',
-    //     body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    //     likes: [
-    //       { user: 'user1', blog: 'blog1' },
-    //       { user: 'user2', blog: 'blog1' },
-    //     ],
-    //   });
-    // });
+    beforeAll(async () => {
+      // create a sample blog to be used in the tests
+      blog = await Blog.create({
+        title: 'Test Blog',
+        body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        likes: [
+          { user: 'user1', blog: 'blog1' },
+          { user: 'user2', blog: 'blog1' },
+        ],
+      });
+    });
   
-    // afterAll(async () => {
-    //   // remove the sample blog after all tests are done
-    //   await Blog.deleteOne({ _id: blog._id });
-    // });
+    afterAll(async () => {
+      // remove the sample blog after all tests are done
+      await Blog.deleteOne({ _id: `63e8c634d7a3542707a55caa`});
+    });
   
     it('should return the number of likes for a blog', async () => {
       const response = await request(app)
-        .get(`/likesCounting/${blog._id}`)
+        .get(`/likesCounting/${`63e8c634d7a3542707a55caa`}`)
         .expect(200);
   
       expect(response.body.success).toBe(true);

@@ -101,35 +101,7 @@ class userController {
       });
     }
   }
-  static async UpdateOne(req, res) {
-    const { password } = req.body;
 
-    if (password) {
-      return res.status(400).json({
-        status: 'fail',
-        message: 'this is not the route for updating password is for others',
-      });
-    }
-    const updateUser = await userModel.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      {
-        new: true,
-        runValidators: true,
-      }
-    );
-    try {
-      res.status(200).json({
-        status: 'success',
-        message: 'Update success done ',
-      });
-    } catch (error) {
-      res.status(404).json({
-        status: 'error',
-        error: error,
-      });
-    }
-  }
   static async deleteOne(req, res) {
    await userModel.findById(req.params.id);
     if (!user) {
@@ -152,13 +124,48 @@ class userController {
     }
   }
 }
+  export const UpdateOne = async(req, res)=> {
+    const { password } = req.body;
+
+    if (password) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'this is not the route for updating password is for others',
+      });
+    }
+ const updateUser = await userModel.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+    try {
+      res.status(200).json({
+        status: 'success',
+        message: 'Update success done ',
+      });
+    } catch (error) {
+      res.status(400).json({
+        status: 'error',
+        error: error,
+      });
+    }
+  }
+
 export const getAllUsers = async(req,res)=>{
   const users = await userModel.find();
-  res.send(users);
+  res.status(200).send(users);
 }
 export const getAllUsersById = async(req,res) =>{
+try {
   const userss = await userModel.findById({_id: req.params.id});
-  res.status(500).send(userss);
+  res.status(200).send(userss);
+} catch  {
+  res.status(500);
+    res.send({ error: "user doesn't exist!" });
+}
 }
 export const deleteSingleUserById = async (req, res) => {
   try {

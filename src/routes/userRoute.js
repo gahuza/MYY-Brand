@@ -1,5 +1,6 @@
 import express from 'express';
 import userController from '../controllers/userController.js';
+import { UpdateOne } from '../controllers/userController.js';
 import { auth, userRole } from '../middleware/auth.js';
 
 const route = express.Router();
@@ -7,7 +8,7 @@ const route = express.Router();
 route.post('/signup', userController.postOne);
 route.post('/signin', userController.post);
 route.get('/signin', auth, userController.findAll);
-route.patch('/update/:id', auth, userController.UpdateOne);
+route.patch('/update/:id', auth, UpdateOne);
 route.delete('/delete/:id', auth, userRole('admin'), userController.deleteOne);
 
 export default route;
