@@ -28,7 +28,7 @@ export const deletequery = async (req, res) => {
   try {
       const  queries = await Query.deleteOne({ _id: req.params.id });
     res.status(207).send({ok:'delete success'});
-  } catch {
+  } catch(error) {
     res.status(406);
     res.send({ error: "query doesn't exist!" });
   }
