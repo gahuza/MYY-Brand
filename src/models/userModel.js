@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import bcryptjs from 'bcryptjs';
-// import validator from 'validator';
+import validator from 'validator';
 
 
 
@@ -56,17 +56,17 @@ const userModel = new mongoose.Schema({
   //   default: 'none',
   // },
 });
-userModel.pre('save', async function (next) {
-  if (!this.isModified('password')) return next();
-  this.password = await bcryptjs.hash(this.password, 12);
-});
+// userModel.pre('save', async function (next) {
+//   if (!this.isModified('password')) return next();
+//   this.password = await bcryptjs.hash(this.password, 12);
+// });
 
-userModel.methods.correctPassword = async function (
-  candidatePassword,
-  userPassword
-) {
-  return await bcryptjs.compare(candidatePassword, userPassword);
-};
+// userModel.methods.correctPassword = async function (
+//   candidatePassword,
+//   userPassword
+// ) {
+//   return await bcryptjs.compare(candidatePassword, userPassword);
+// };
 
 const User = mongoose.model('User', userModel);
 
