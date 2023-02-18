@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import bcryptjs from 'bcryptjs';
-import validator from 'validator';
+// import bcryptjs from 'bcryptjs';
+// import validator from 'validator';
 
 
 
