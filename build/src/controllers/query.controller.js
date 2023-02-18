@@ -1,5 +1,5 @@
 import Query from "../models/Queries.model.js";
-const httpCreateQuery = async (req, res) => {
+export const httpCreateQuery = async (req, res) => {
   try {
     const query = new Query(req.body);
     await query.save();
@@ -16,9 +16,9 @@ const httpCreateQuery = async (req, res) => {
     });
   }
 };
-const findQueri = async (req, res) => {
+export const findQueri = async (req, res) => {
   const queries = await Query.find();
-  res.status(203).send(queries);
+  res.status(200).send(queries);
 };
 export const deletequery = async (req, res) => {
   try {
@@ -35,5 +35,4 @@ export const deletequery = async (req, res) => {
     });
   }
 };
-export { httpCreateQuery, findQueri };
 //# sourceMappingURL=query.controller.js.map

@@ -104,7 +104,7 @@ export const createBlog = async function(req, res){
     try {
      await Blog.deleteOne({ _id: req.params.id });
       res.status(207).send({ok:'delete success'});
-    } catch {
+    } catch (error){
       res.status(406);
       res.send({ error: "blog doesn't exist!" });
     }
