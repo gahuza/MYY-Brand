@@ -162,7 +162,7 @@ export const getAllUsersById = async(req,res) =>{
 try {
   const userss = await userModel.findById({_id: req.params.id});
   res.status(200).send(userss);
-} catch  {
+} catch (error) {
   res.status(500);
     res.send({ error: "user doesn't exist!" });
 }
@@ -171,7 +171,7 @@ export const deleteSingleUserById = async (req, res) => {
   try {
       await userModel.deleteOne({ _id: req.params.id });
     res.status(207).send({ok:'delete success'});
-  } catch {
+  } catch (error) {
     res.status(406);
     res.send({ error: "user doesn't exist!" });
   }
