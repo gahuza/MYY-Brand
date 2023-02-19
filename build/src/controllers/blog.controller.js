@@ -61,7 +61,7 @@ export const createBlog = async function (req, res) {
 //   };
 export const getAllBlogs = async (req, res) => {
   const blogs = await Blog.find();
-  res.status(200).json({
+  res.json({
     status: 200,
     success: true,
     data: blogs
@@ -98,7 +98,7 @@ export const deleteBlog = async (req, res) => {
     res.status(207).send({
       ok: 'delete success'
     });
-  } catch {
+  } catch (error) {
     res.status(406);
     res.send({
       error: "blog doesn't exist!"
@@ -190,8 +190,8 @@ export const getAllComments = async (req, res) => {
       });
       return;
     }
-    res.status(200).send(blog.comments);
-  } catch {
+    res.status(201).send(blog.comments);
+  } catch (error) {
     res.status(500).json({
       error: 'Internal server error'
     });

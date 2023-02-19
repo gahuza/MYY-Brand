@@ -18,7 +18,7 @@ export const httpCreateQuery = async (req, res) => {
 };
 export const findQueri = async (req, res) => {
   const queries = await Query.find();
-  res.status(200).send(queries);
+  res.send(queries);
 };
 export const deletequery = async (req, res) => {
   try {
@@ -28,7 +28,7 @@ export const deletequery = async (req, res) => {
     res.status(207).send({
       ok: 'delete success'
     });
-  } catch {
+  } catch (error) {
     res.status(406);
     res.send({
       error: "query doesn't exist!"

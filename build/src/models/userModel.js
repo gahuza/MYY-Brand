@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
 import bcryptjs from 'bcryptjs';
 import validator from 'validator';
-const userModel = new mongoose.Schema({
+const schema = mongoose.Schema;
+const userModel = new schema({
   firstName: {
     type: String,
     required: [true, 'firstName is required']

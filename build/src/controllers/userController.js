@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import userModel from '../Models/userModel.js';
+import userModel from '../models/userModel.js';
 import dotenv from "dotenv";
 dotenv.config();
 const signInToken = id => {};
@@ -53,7 +53,7 @@ class userController {
         }
       });
     } catch (error) {
-      res.status(200).json({
+      res.status(500).json({
         status: 'error',
         error: error
       });
@@ -87,7 +87,7 @@ class userController {
       }, process.env.TOKEN_SECRET, {
         expiresIn: process.env.JWT_EXPERISIN
       });
-      res.status(200).json({
+      res.status(201).json({
         status: 'success',
         users: 'SignIn success and login',
         LoggedInAs: {
@@ -162,7 +162,7 @@ export const getAllUsersById = async (req, res) => {
       _id: req.params.id
     });
     res.status(200).send(userss);
-  } catch {
+  } catch (error) {
     res.status(500);
     res.send({
       error: "user doesn't exist!"
@@ -177,7 +177,7 @@ export const deleteSingleUserById = async (req, res) => {
     res.status(207).send({
       ok: 'delete success'
     });
-  } catch {
+  } catch (error) {
     res.status(406);
     res.send({
       error: "user doesn't exist!"

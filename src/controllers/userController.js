@@ -56,7 +56,7 @@ class userController {
         },
       });
     } catch (error) {
-      res.status(200).json({
+      res.status(500).json({
         status: 'error',
         error: error,
       });
@@ -86,7 +86,7 @@ class userController {
       const token = await jwt.sign({ id: user._id }, process.env.TOKEN_SECRET, {
         expiresIn: process.env.JWT_EXPERISIN,
       });
-      res.status(200).json({
+      res.status(201).json({
         status: 'success',
         users: 'SignIn success and login',
         LoggedInAs: {

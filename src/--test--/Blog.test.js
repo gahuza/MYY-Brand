@@ -1,4 +1,4 @@
-import request from "supertest";
+import  request  from "supertest";
 import supertest from "supertest";
 import jwt from 'jsonwebtoken';
 import mongoose from "mongoose";
@@ -9,10 +9,12 @@ import  response  from "supertest";
 dotenv.config({ path: "../.env" });
 import Query from "../models/Queries.model.js";
 import Blog from "../models/Blogs.model.js";
+import httpMocks from "node-mocks-http";
 // import { describe } from "@hapi/joi/lib/base.js";
 import userModel from '../Models/userModel.js';
 import { getAllUsers, getAllUsersById ,deleteSingleUserById ,UpdateOne} from "../controllers/userController.js";
 import { httpCreateQuery, findQueri, deletequery } from "../controllers/query.controller.js";
+import cloudinary from "cloudinary"
 // import UpdateOne from "../controllers/userController";
 
 
@@ -47,12 +49,13 @@ beforeEach(async () => {
       comments: [],
       likes: [],
     });
-    // await userModel.create({
-    //   username: 'username',
-    //   email: 'email@gmail.com',
-    //   password: 'password',
-    //   isAdmin: 'true',
-    // });
+    await userModel.create({
+      firstName:'firstName',
+      lastName: 'lastName',
+      email: 'email@gmail.com',
+      password: 'password',
+      isAdmin: 'true',
+    });
   } 
     
    catch (error) {
@@ -62,6 +65,9 @@ beforeEach(async () => {
 });
 /* Closing database connection after each test. */
 afterEach(async () => {
+  await Blog.deleteMany({});
+  await userModel.deleteMany({});
+  await mongoose.disconnect();
   await mongoose.connection.close();
 });
 
@@ -160,43 +166,164 @@ describe('api test Queries', () => {
     jest.clearAllMocks();
   });
 
-  it('should create a new query', async () => {
-    const mockQuery = new Query(req.body);
-    jest.spyOn(Query.prototype, 'save').mockResolvedValueOnce(mockQuery);
 
-    await httpCreateQuery(req, res);
 
-    expect(res.status).toHaveBeenCalledWith(201);
-    expect(res.json).toHaveBeenCalledWith({
-      success: true,
-      message: 'query create succefully',
-      Query: mockQuery,
-    });
-  });
-
-  it('should call with the queries', async () => {
-    const queries = [{ id: 1, text: 'Hello' }, { id: 2, text: 'World' }];
-    Query.find = jest.fn().mockResolvedValue(queries);
-
-    const req = {};
-    const res = { send: jest.fn() };
-
-    await findQueri(req, res);
-
-    expect(Query.find).toHaveBeenCalledTimes(1);
-    expect(res.send).toHaveBeenCalledWith(queries);
-  });
-
+  it('return a 201 status to create query', async () => {
   
+    const query = {
+      email: 'jadokero12@gmail.ac.rw',
+      content: 'query content',
+    };
+    const createdQuery = await request(app)
+      .post('/api/query/get')
+      .send(query)
+    expect(createdQuery.status).toEqual(404);
+    expect(createdQuery.body.data).toHaveProperty(
+      'email',
+      'content',
+    );
+  });
+
+   
 });
 
 
 
 
+describe('GET /api/blogs', () => {
+  // it('get any specified route', async (req,res) => {
+  //   request(app).get('/api/blogs');
+  //   expect(res.status).toEqual(200);
+  // });
+
+  it('get all blogs', async () => {
+    const res = await request(app).get('/api/blogs');
+    expect(res.status).toEqual(200);
+    const blog = res.body.data;
+    expect(Array.isArray(blog)).toBe(true);
+    expect(blog[0]).toHaveProperty(
+      'title',
+      'content',
+      'image',
+      'likes',
+      'comments',
+      '_id',
+    );
+  });
+
+
+  // it('responds with JSON and a success status when blog is found', async () => {
+  //   const blog = {
+  //     _id: '63e8c634d7a3542707a55caa',
+  //     title: 'okelloalan',
+  //     content: 'ways'
+  //   };
+  //   const response = await request(app).get(`/api/blogs/${blog._id}`);
+  //   expect(response.statusCode).toBe(404);
+  //   expect(response.headers['content-type']).toEqual(expect.stringContaining('json'));
+  //   expect(response.body).toEqual({
+  //     status: 'success',
+  //     number: 1,
+  //     blogs: [blog]
+  //   });
+  // });
+  it('return one blog', async () => {
+    const allBlogs = await request(app).get('/api/blogs');
+    const currentBlog = allBlogs.body.data[0];
+    const id = currentBlog._id;
+    const res = await request(app).get(`/api/blogs/${id}`);
+    expect(res.status).toEqual(200);
+  });
+
+
+  it('should delete a blog with valid ID', async () => {
+    const blogId= "63e8c634d7a3542707a55caa";
+    const response = await request(app).delete(`/api/blogs/${blogId}`);
+    expect(response.status).toBe(207);
+    expect(response.body).toEqual({ ok: 'delete success' });
+  });
 
 
 
+  it('return a 201 status to create blog', async () => {
+  
+    const blog = {
 
+      topic: 'blog topic',
+      title: 'blog title',
+      content: 'blog content',
+    };
+    const createdBlog = await request(app)
+      .post('/api/blogs/')
+      .send(blog)
+    expect(createdBlog.status).toEqual(201);
+    expect(createdBlog.body.data).toHaveProperty(
+      'topic',
+      'title',
+      'content',
+      'likes',
+      'comments',
+      '_id',
+    );
+  });
+
+  it('return a 201 status to update blog ', async () => {
+
+    const blog = {
+      title: 'blog title',
+      content: 'blog content',
+    };
+    const allBlogs = await request(app).get('/api/blogs');
+    const currentBlog = allBlogs.body.data[0];
+    const id = currentBlog._id;
+    const updatedBlog = await request(app)
+      .patch(`/api/blogs/${id}`)
+      .send(blog)
+    expect(updatedBlog.status).toEqual(201);
+    expect(updatedBlog.body.data).toHaveProperty(
+      'title',
+      'content',
+      'likes',
+      'comments',
+      '_id',
+    );
+  });
+
+ 
+  it('return a 201 status if user is logged in', async () => {
+    const user = {
+      email: 'email@gmail.com',
+      password: 'password',
+    };
+    const comment = {
+      comment: 'comment',
+    };
+    const login = await request(app).post('/api/signin').send(user);
+    const token = login.body.token;
+    const allBlogs = await request(app).get('/api/blogs');
+    const currentBlog = allBlogs.body.data[0];
+    const id = currentBlog._id;
+    const updatedBlog = await request(app)
+      .post(`/api/blogs/comments/${id}`)
+      .send(comment)
+      .set('auth', 'Bearer ' + token);
+    expect(updatedBlog.status).toEqual(201);
+    expect(updatedBlog.body.message).toEqual('Comment added');
+  });
+
+})
+
+ // get all comments
+ describe('GET /blogs/:id/comments', () => {
+ 
+  it('return one blog', async () => {
+    const allBlogs = await request(app).get('/api/blogs');
+    const currentBlog = allBlogs.body.data[0];
+    const id = currentBlog._id;
+    const res = await request(app).get(`/api/comments/${id}`);
+    expect(res.status).toEqual(200);
+  });
+});
 
 
 

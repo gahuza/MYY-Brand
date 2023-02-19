@@ -71,7 +71,7 @@ export const createBlog = async function(req, res){
   //   };
     export const getAllBlogs = async (req, res) => {
       const blogs = await Blog.find();
-      res.status(200).json({ status: 200, success: true, data: blogs });
+      res.json({ status: 200, success: true, data: blogs });
     };
     
 
@@ -185,7 +185,7 @@ export const createBlog = async function(req, res){
         return;
       }
   
-      res.status(200).send(blog.comments);
+      res.status(201).send(blog.comments);
     } catch (error){
       res.status(500).json({ error: 'Internal server error' });
     }
