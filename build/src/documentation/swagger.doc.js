@@ -58,7 +58,7 @@ const options = {
         }
       }
     },
-    '/api/signin': {
+    '/api/signin/user': {
       post: {
         tags: ['Users'],
         description: 'User login',
@@ -84,6 +84,26 @@ const options = {
           },
           400: {
             description: 'Invalid credation'
+          },
+          500: {
+            description: 'Internal Server Error'
+          }
+        }
+      }
+    },
+    '/api/signIn/upget': {
+      get: {
+        security: [],
+        tags: ['userModel'],
+        description: 'Get One Blog user by id',
+        parameters: [{
+          "in": "path",
+          "name": "id",
+          required: true
+        }],
+        responses: {
+          200: {
+            description: 'successfully'
           },
           500: {
             description: 'Internal Server Error'
@@ -198,7 +218,7 @@ const options = {
         }
       }
     },
-    '/api/blogs/{id}': {
+    '/api/blogs/update/{id}': {
       patch: {
         tags: ['Blog'],
         description: 'Update blog article',
@@ -272,11 +292,15 @@ const options = {
         }
       }
     },
-    '/api/blogs/comments/': {
+    '/api/blogs/comments/{id}/': {
       post: {
         tags: ['Blog'],
-        description: 'Comment on article blog article',
-        parameters: [],
+        description: 'Comment on blog article',
+        parameters: [{
+          "in": "path",
+          "name": "id",
+          required: true
+        }],
         requestBody: {
           content: {
             'application/json': {
@@ -284,7 +308,6 @@ const options = {
                 $ref: '#/components/schemas/Blog'
               },
               example: {
-                article_id: "6251374247c7a6f93bdd52e7",
                 comment: "that content is very helpful thanks"
               }
             }

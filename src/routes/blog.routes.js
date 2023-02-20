@@ -25,12 +25,12 @@ var upload = multer({
 blogRouter.post('/blogs',upload.single("image"),createBlog);
 
  blogRouter.get('/blogs/get',getAllBlogs)
- blogRouter.get('/signIn',getAllUsers)
+ blogRouter.get('/signIn/upget',getAllUsers)
  blogRouter.get('/blogs/:id',getBlogById )
  blogRouter.get('/signIn/:id',getAllUsersById)
 blogRouter.delete('/blogs/:id',deleteBlog)
 blogRouter.delete('/signIn/:id',deleteSingleUserById)
-blogRouter.patch('/blogs/:id',upload.single("image"), updateSingleBlog);
+blogRouter.patch('/blogs/update/:id',upload.single("image"), updateSingleBlog);
 //blog likes
 blogRouter.post('/blogs/:id/likes',auth, like);
 blogRouter.get('/blogs/:id/likes', likesCounting);
