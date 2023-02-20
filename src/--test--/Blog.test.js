@@ -327,49 +327,62 @@ describe('GET /api/blogs/get', () => {
 });
 
 
-//  //add or remove like
-//  describe('POST /blogs/:id/likes', () => {
-//   // it('return a 401 status if user is not logged in', async () => {
-//   //   const res = await request(app).post('/api/blogs/').send({});
-//   //   expect(res.status).toEqual(401);
-//   // });
-//   it("return a 400 status if blog doesn't exist", async () => {
-//     const user = {
-//       email: 'email@gmail.com',
-//       password: 'password',
-//     };
 
-//     const login = await request(app).post('/api/signin').send(user);
-//     const token = login.body.token;
-//     const allBlogs = await request(app).get('/api/blogs');
-//     const currentBlog = allBlogs.body.data[0];
-//     const id = currentBlog._id;
-//     const updatedBlog = await request(app)
-//       .post(`/api/blogs/${id + 1}/likes`)
-//       .set('auth', 'Bearer ' + token);
-//     expect(updatedBlog.status).toEqual(404);
-//     const message = updatedBlog.body.message;
-//     expect(message).toEqual("Blog doesn't exist!");
-//   });
-//   it('return a 201 status if user is logged in', async () => {
-//     const user = {
-//       email: 'email@gmail.com',
-//       password: 'password',
-//     };
 
-//     const login = await request(app).post('/api/signin').send(user);
-//     const token = login.body.token;
-//     const allBlogs = await request(app).get('/api/blogs');
-//     const currentBlog = allBlogs.body.data[0];
-//     const id = currentBlog._id;
-//     const updatedBlog = await request(app)
-//       .post(`/api/blogs/${id}/likes`)
 
-//       .set('auth', 'Bearer ' + token);
-//     expect(updatedBlog.status).toEqual(200);
-//     expect(updatedBlog.body.data[0].message).toEqual('Done');
-//   });
-// });
+ //add or remove like
+ describe('POST /blogs/:id/likes', () => {
+  // it('return a 401 status if user is not logged in', async () => {
+  //   const res = await request(app).post('/api/blogs/').send({});
+  //   expect(res.status).toEqual(401);
+  // });
+  it("return a 400 status if blog doesn't exist", async () => {
+    const user = {
+      email: 'email@gmail.com',
+      password: 'password',
+    };
+
+    const login = await request(app).post('/api/signin/user').send(user);
+    const token = login.body.token;
+    const allBlogs = await request(app).get('/api/blogs/get');
+    const currentBlog = allBlogs.body.data[0];
+    const id = currentBlog._id;
+    const updatedBlog = await request(app)
+      .post(`/api/blogs/${id + 1}/likes`)
+      .set('auth', 'Bearer ' + token);
+    expect(updatedBlog.status).toEqual(404);
+    const message = updatedBlog.body.message;
+    expect(message).toEqual("Blog doesn't exist!");
+  });
+  it('return a 201 status if user is logged in', async () => {
+    const user = {
+      email: 'email@gmail.com',
+      password: 'password',
+    };
+
+    const login = await request(app).post('/api/signin/user').send(user);
+    const token = login.body.token;
+    const allBlogs = await request(app).get('/api/blogs/get');
+    const currentBlog = allBlogs.body.data[0];
+    const id = currentBlog._id;
+    const updatedBlog = await request(app)
+      .post(`/api/blogs/${id}/likes`)
+      .set('auth', 'Bearer ' + token);
+    expect(updatedBlog.status).toEqual(200);
+    expect(updatedBlog.body.data[0].message).toEqual('Done');
+  });
+});
+
+describe('GET /api/blogs/:id/likes', () => {
+ 
+  it('return one blog', async () => {
+    const allBlogs = await request(app).get('/api/blogs/get');
+    const currentBlog = allBlogs.body.data[0];
+    const id = currentBlog._id;
+    const res = await request(app).get(`/api/blogs/${id}/likes`);
+    expect(res.status).toEqual(200);
+  });
+});
 
 
 
