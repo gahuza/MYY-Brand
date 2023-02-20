@@ -19,7 +19,7 @@ var upload = multer({
   }
 });
 blogRouter.post('/blogs', upload.single("image"), createBlog);
-blogRouter.get('/blogs', getAllBlogs);
+blogRouter.get('/blogs/get', getAllBlogs);
 blogRouter.get('/signIn', getAllUsers);
 blogRouter.get('/blogs/:id', getBlogById);
 blogRouter.get('/signIn/:id', getAllUsersById);

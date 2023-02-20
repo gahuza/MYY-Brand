@@ -114,7 +114,7 @@ tags: [
       },
       }
   },
-    '/api/blogs/': {
+    '/api/blogs/get': {
         get: {
         tags: ['Blog'],
         description: 'Get All Blog Articles',
@@ -183,7 +183,7 @@ tags: [
     //    },
     //   ],
       requestBody: {
-        body: {
+        content: {
           'multipart/form-data': {
             schema: {
               $ref: '#/components/schemas/Blog',
@@ -202,7 +202,7 @@ tags: [
         500: {
             description: 'Internal Server Error'
         }
-      },
+      }, 
     }
   },
   '/api/blogs/{id}':{

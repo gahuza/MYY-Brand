@@ -17,20 +17,32 @@ cloudinary.config({
         api_key: "process.env.API_KEY",
         api_secret: "process.env.API_SECRET",
       });
-
+      var today = new Date()
+      var dd = String(today.getDate()).padStart(2, "0");
+      var mm = String(today.getMonth() +1).padStart(2, "0");
+      var yyyy = today.getFullYear();
+      today= dd+ "/" + mm + "/" + yyyy;
 
 export const createBlog = async function(req, res){
     console.log("AASASASASA", req.body)
     try {
+      const {title, body}=req.body
+        console.log(title, body)
+        // const validationResult = await blogSchema.validateAsync(req.body);
         // if(req.files) {
             
-            const image = await cloudinary.uploader.upload(req.file.path);
-            // }
+        //     const image = await cloudinary.uploader.upload(req.file.path);
+        //     }
                const blog= await new Blog({
-                    title:req.body.title,
-                    body:req.body.body,
-                    image: image.secure_url,
+                title:title,
+                body:body,
+                postedDate: today,
+                imageUrl: '',
                 })
+                if(req.files) {
+                  const image = await imageUpload(req);
+                  blog.imageUrl = image.url
+                  }
              
             blog.save()
             .then(result=>{

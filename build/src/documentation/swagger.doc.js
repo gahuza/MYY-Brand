@@ -111,7 +111,7 @@ const options = {
         }
       }
     },
-    '/api/blogs/': {
+    '/api/blogs/get': {
       get: {
         tags: ['Blog'],
         description: 'Get All Blog Articles',
@@ -176,7 +176,7 @@ const options = {
         //    },
         //   ],
         requestBody: {
-          body: {
+          content: {
             'multipart/form-data': {
               schema: {
                 $ref: '#/components/schemas/Blog'
