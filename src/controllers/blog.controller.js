@@ -14,9 +14,9 @@ cloudinary.v2;
 // const API_KEY = ;
 // const API_SECRET= ;
 cloudinary.config({
-        cloud_name:"process.env.CLOUD_NAME",
-        api_key: "process.env.API_KEY",
-        api_secret: "process.env.API_SECRET",
+        cloud_name:process.env.CLOUD_NAME,
+        api_key: process.env.API_KEY,
+        api_secret: process.env.API_SECRET,
       });
       var today = new Date()
       var dd = String(today.getDate()).padStart(2, "0");
@@ -29,32 +29,24 @@ export const createBlog = async function(req, res){
     console.log("AASASASASA", req.body)
     try {
       const {title, body}=req.body
-        console.log(title, body)
+        console.log(title, body,req.file)
         // const validationResult = await blogSchema.validateAsync(req.body);
         // if(req.files) {
             
-        //     const image = await cloudinary.uploader.upload(req.file.path);
-        //     }
-               const blog= await new Blog({
+            const image = await cloudinary.uploader.upload(req.file.path);
+            // }
+               const blog= await Blog.create({
                 title:title,
                 body:body,
                 postedDate: today,
-                imageUrl: '',
+                image: image.secure_url,
                 })
-                /* istanbul ignore next*/
-                if(req.files) {
-                  const image = await imageUpload(req);
-                  blog.imageUrl = image.url
-                  }
-             
-            blog.save()
-           /* istanbul ignore next*/
-            .then(result=>{
-                console.log(result);
-                res.json(result)
-                res.status(201).send({ok:'add  successfully'});
-            })
-            .catch(error=>console.log(error))
+                
+                return  res.status(201).json({
+                  status:"success",
+                  message:"Blo  created success",
+                  blog,
+                })
 
     
     }
