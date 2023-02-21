@@ -92,28 +92,25 @@ tags: [
         },
         }
     },
-    '/api/signIn/upget': {
-      get: {
-        security: [],
-      tags: ['userModel'],
-      description: 'Get One Blog user by id',
-      parameters: [
-        {
-           "in": "path",
-         "name": "id",
-          required: true,
-        }
-      ],
-      responses: {
-        200: {
-          description: 'successfully',
-        },
-        500: {
-            description: 'Internal Server Error'
-        }
+  
+
+  '/api/signIn/upget': {
+    get: {
+    tags: ['userModel'],
+    description: 'Get All signIn ',
+    parameters: [],
+    security: [],
+    responses: {
+      200: {
+        description: 'Retrieve successfully',
       },
+      500: {
+          description: 'Internal Server Error'
       }
-  },
+    },
+  }
+},
+
     '/api/signIn/{id}': {
       get: {
         security: [],
