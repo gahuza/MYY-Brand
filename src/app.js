@@ -1,8 +1,9 @@
 import  express  from "express";
 import bodyParser from 'body-parser';
 import morgan from "morgan";
+import { corsOpts } from "./middleware/corsOption.js";
+import cors from "cors";
 // import { apiRouter } from "./routes/api.js";
-
 import apiRouter from './routes/api.js';
  import blogRouter from './routes/blog.routes.js';
 // import  autRouter  from './routes/userRoute.js';
@@ -12,6 +13,7 @@ import swaggerUi from 'swagger-ui-express'
 import  docrouter  from "./documentation/swagger.doc.js";
 
 const app = express();
+app.use(cors(corsOpts))
 app.use(bodyParser.json());
 app.use(morgan("combined"));
 app.use(express.json());
