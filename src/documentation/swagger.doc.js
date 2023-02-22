@@ -342,6 +342,25 @@ tags: [
       },
     }
   },
+  '/api/comments':{
+    get:{
+      tags:['Blog'],
+      description:'Getting all comments on blog',
+      parameters: [],
+      responses: {
+        200: {
+          description: 'successfully',
+        },
+        401: {
+          description: 'Not Authorized',
+        },
+        500: {
+            description: 'Internal Server Error'
+      },
+    },
+    }
+  },
+  },
 
   '/api/query/send/':{
     post:{
