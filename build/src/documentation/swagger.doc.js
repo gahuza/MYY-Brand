@@ -93,17 +93,13 @@ const options = {
     },
     '/api/signIn/upget': {
       get: {
-        security: [],
         tags: ['userModel'],
-        description: 'Get One Blog user by id',
-        parameters: [{
-          "in": "path",
-          "name": "id",
-          required: true
-        }],
+        description: 'Get All signIn ',
+        parameters: [],
+        security: [],
         responses: {
           200: {
-            description: 'successfully'
+            description: 'Retrieve successfully'
           },
           500: {
             description: 'Internal Server Error'
@@ -323,6 +319,26 @@ const options = {
           },
           404: {
             description: 'Article doesn\'t exist!'
+          },
+          500: {
+            description: 'Internal Server Error'
+          }
+        }
+      }
+    },
+    '/api/comments/{id}': {
+      get: {
+        security: [],
+        tags: ['Blog'],
+        description: 'Get One Blog article by id',
+        parameters: [{
+          "in": "path",
+          "name": "id",
+          required: true
+        }],
+        responses: {
+          200: {
+            description: 'successfully'
           },
           500: {
             description: 'Internal Server Error'

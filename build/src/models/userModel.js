@@ -28,11 +28,13 @@ const userModel = new schema({
     type: String,
     default: 'local',
     enum: ['admin', 'local']
-  },
-  profileImage: {
-    type: String,
-    default: 'https://res.cloudinary.com/nrob/image/upload/v1613451239/npc5d5r9g0nyyihppqxd.png'
   }
+
+  // profileImage: {
+  //   type: String,
+  //   default:
+  //     'https://res.cloudinary.com/nrob/image/upload/v1613451239/npc5d5r9g0nyyihppqxd.png',
+  // },
   // location: {
   //   type: String,
   //   default: 'none',

@@ -1,6 +1,6 @@
-// import cloudinary  from 'cloudinary';
-// import uploader from '../config/cloudinary';
-// cloudinary.v2;
+import { v2 as cloudinary } from 'cloudinary';
+import dotenv from 'dotenv';
+dotenv.config();
 
 // cloudinary.config({
 //         cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -10,18 +10,16 @@
 
 // // module.exports = cloudinary.uploader;
 
-// const blogImage = async (req) => {
-//     try {
-//         const tmp = req.files.photo.tempFilePath;
-//         const Result = await uploader.upload(
-//             tmp,
-//             { folder: 'my-brand' },
-//             (_, result) => result
-//         );
-//         return Result;
-//     } catch (error) {
-//         console.log(error);
-//     }
-// };
-// export default blogImage
+const blogImage = async req => {
+  try {
+    const tmp = req.files.photo.tempFilePath;
+    const Result = await uploader.upload(tmp, {
+      folder: 'my-brand'
+    }, (_, result) => result);
+    return Result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export default blogImage;
 //# sourceMappingURL=imageUpload.js.map
