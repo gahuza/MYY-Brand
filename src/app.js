@@ -6,7 +6,6 @@ import cors from "cors";
 // import { apiRouter } from "./routes/api.js";
 import apiRouter from './routes/api.js';
  import blogRouter from './routes/blog.routes.js';
-// import  autRouter  from './routes/userRoute.js';
 import route from './routes/userRoute.js';
 import swaggerJsdoc from 'swagger-jsdoc'
 import swaggerUi from 'swagger-ui-express'
