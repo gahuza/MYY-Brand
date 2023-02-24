@@ -1,26 +1,16 @@
 {
-  "name": "c-27",
-  "version": "1.0.0",
-  "description": "c-27",
+
   "type": "module",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "nodemon src/server.js",
 
     "test": "jest --coverage --forceExit",
     "test:watch": "npm run test -- --watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Abdulkeza/movie-api.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Abdulkeza/movie-api/issues"
-  },
-  "homepage": "https://github.com/Abdulkeza/movie-api#readme",
+ 
+  
+
   "dependencies": {
     "@babel/cli": "^7.20.7",
     "@hapi/joi": "^17.1.1",
