@@ -151,7 +151,7 @@ tags: [
     },
 
     
-    '/api/blogs/{id}': {
+    '/api/blogss/{id}': {
       get: {
         security: [],
       tags: ['Blog'],
