@@ -26,7 +26,7 @@ blogRouter.post('/blogs',upload.single("image"),createBlog);
 
  blogRouter.get('/blogs/get',getAllBlogs)
  blogRouter.get('/signIn/upget',getAllUsers)
- blogRouter.get('/blogs/:id',getBlogById )
+ blogRouter.get('/blogss/:id',getBlogById )
  blogRouter.get('/signIn/:id',getAllUsersById)
 blogRouter.delete('/blogs/:id',deleteBlog)
 blogRouter.delete('/signIn/:id',deleteSingleUserById)
