@@ -303,7 +303,7 @@ tags: [
     }
   },
  
-  '/api/blogs/comments/{id}/':{
+  '/api/blogs/comments/{id}':{
     post:{
       tags:['Blog'],
       description:'Comment on blog article',

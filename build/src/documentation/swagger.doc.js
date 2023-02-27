@@ -93,17 +93,13 @@ const options = {
     },
     '/api/signIn/upget': {
       get: {
-        security: [],
         tags: ['userModel'],
-        description: 'Get One Blog user by id',
-        parameters: [{
-          "in": "path",
-          "name": "id",
-          required: true
-        }],
+        description: 'Get All signIn ',
+        parameters: [],
+        security: [],
         responses: {
           200: {
-            description: 'successfully'
+            description: 'Retrieve successfully'
           },
           500: {
             description: 'Internal Server Error'
